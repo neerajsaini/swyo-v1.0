@@ -143,6 +143,10 @@ if (defined('ENVIRONMENT'))
 
 	define('PRITTY_URL_PREFIX', 	FALSE);
 
+	
+	echo '<br> DOCUMENT_ROOT : ' . $_SERVER['DOCUMENT_ROOT'];
+	echo '<br> ASSETS_PATH : ' . ASSETS_PATH;
+
 /*
  *---------------------------------------------------------------
  * CI FOLDER
