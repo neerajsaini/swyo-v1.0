@@ -101,14 +101,14 @@ if (defined('ENVIRONMENT'))
 	{
 		case 'www.trackre.net':
 		case 'trackre.net':
-			$ROOT_FOLDER 		= 'swyo/'; 
+			$ROOT_FOLDER 		= 'stream/'; 
 			$WS_FOLDER 			= 'v1.0/'; 
 			$PUBLIC_FOLDER 		= 'www/'; 
 		break;
 
 		case 'localhost' :
 		default :
-			$ROOT_FOLDER 		= 'swyo/'; 
+			$ROOT_FOLDER 		= 'stream/'; 
 			$WS_FOLDER 			= 'v1.0/'; 
 			$PUBLIC_FOLDER 		= 'www/'; 
 	}
