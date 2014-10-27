@@ -95,7 +95,8 @@ if (defined('ENVIRONMENT'))
 
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	$DOCUMENT_ROOT = $_SERVER['DOCUMENT_ROOT'].'/';
+
+	define('DOCUMENT_PUB_FOLDER', (substr($_SERVER['DOCUMENT_ROOT'], strrpos($_SERVER['DOCUMENT_ROOT'], '/')+1)) );
 
 	switch($_SERVER['HTTP_HOST'])
 	{
@@ -103,29 +104,31 @@ if (defined('ENVIRONMENT'))
 		case 'trackre.net':
 			$ROOT_FOLDER 		= 'stream/'; 
 			$WS_FOLDER 			= 'v1.0/'; 
-			$PUBLIC_FOLDER 		= 'www/'; 
+			$CI_FOLDER 			= '_ci/'; 
+			$TPL_FOLDER 		= 'tpl/'; 
 		break;
 
 		case 'localhost' :
 		default :
 			$ROOT_FOLDER 		= 'stream/'; 
 			$WS_FOLDER 			= 'v1.0/'; 
-			$PUBLIC_FOLDER 		= 'www/'; 
+			$CI_FOLDER 			= '_ci/'; 
+			$TPL_FOLDER 		= 'tpl/'; 
 	}
 
 	define('ROOT_FOLDER_PATH', 		$_SERVER['DOCUMENT_ROOT'].'/'. $ROOT_FOLDER );
 	define('WS_FOLDER_PATH', 		$_SERVER['DOCUMENT_ROOT'].'/'. $ROOT_FOLDER . $WS_FOLDER );
-	define('PUBLIC_FOLDER', 		$PUBLIC_FOLDER );
+	define('TPL_FOLDER', 			$TPL_FOLDER );
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	$DEFINE['SHARED_CI_PATH'] 	=		WS_FOLDER_PATH . '_ci/';
+	$DEFINE['SHARED_CI_PATH'] 	=		WS_FOLDER_PATH . $CI_FOLDER;
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	$DEFINE['VENDOR_PATH'] 		=		ROOT_FOLDER_PATH . '_vendor/';
 	$DEFINE['IMAGES_PATH'] 		=		ROOT_FOLDER_PATH . '_images/';
 	$DEFINE['VIDEOS_PATH'] 		=		ROOT_FOLDER_PATH . '_videos/';
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	$DEFINE['SMARTY_T_PATH'] 	= 		realpath(PUBLIC_FOLDER . 'smarty_t');
-	$DEFINE['SMARTY_C_PATH'] 	= 		realpath(PUBLIC_FOLDER . 'smarty_c');
-	$DEFINE['ASSETS_PATH'] 		= 		realpath(PUBLIC_FOLDER . 'assets');
+	$DEFINE['SMARTY_T_PATH'] 	= 		realpath(TPL_FOLDER . 'smarty_t');
+	$DEFINE['SMARTY_C_PATH'] 	= 		realpath(TPL_FOLDER . 'smarty_c');
+	$DEFINE['ASSETS_PATH'] 		= 		realpath(TPL_FOLDER . 'assets');
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	foreach($DEFINE as $const => $path)
 	{
@@ -142,11 +145,6 @@ if (defined('ENVIRONMENT'))
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 	define('PRITTY_URL_PREFIX', 	FALSE);
-
-	
-	echo '<br> DOCUMENT_ROOT : ' . $_SERVER['DOCUMENT_ROOT'];
-	echo '<br> ASSETS_PATH : ' . ASSETS_PATH;
-
 /*
  *---------------------------------------------------------------
  * CI FOLDER
