@@ -38,15 +38,18 @@
 |
 */
 
-if( defined('PRETTY_URL_PREFIX') && PRETTY_URL_PREFIX )
+
+if(PRETTY_URL_PREFIX !== FALSE)
 {
 	$route[PRETTY_URL_PREFIX] = "welcome";
 	$route[PRETTY_URL_PREFIX.'/(:any)'] = "$1";
+	$route['404_override'] = '';
 }
-
-$route['default_controller'] = "welcome";
-$route['404_override'] = '';
-
+else
+{
+	$route['default_controller'] = "welcome";
+	$route['404_override'] = '';
+}
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
