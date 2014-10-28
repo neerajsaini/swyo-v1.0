@@ -1,0 +1,158 @@
+{{extends file="layout/master.html"}}
+
+{{block 'pgContent'}} 
+<div id="pgContent" class="pgContent pgHome">
+	
+	<!-- ### bannerHeader ### -->
+	<section class="bannerHeader">
+		<img class="logo" src="{{images_url('logo/swyo_big.png')}}" >
+		<div class="slogan">
+			Experiment to bring your favourite PC content 
+			<br> in one place, on any screen
+		</div>
+		<div class="mainBtnGroup">
+			<a class="btn btnTryOut "href="{{site_url('login')}}"> Try it out </a>
+			<a class="btn btnSignUp" href="{{site_url('register')}}"> Sign up </a>
+		</div>
+	</section>
+
+	<!-- ### prototypeVideoBlock ### -->
+	<section id="prototypeVideoBlock" class="prototypeVideoBlock" >
+		<!-- ### prototypeVideo ### -->
+		<video id="prototypeVideo" class="video-js vjs-default-skin" style="background:#111;" loop>
+			<source src="{{videos_url('BannerVideo.mp4')}}" type="video/mp4">
+			<source src="{{videos_url('BannerVideo.webm')}}" type="video/webm">
+			<source src="{{videos_url('BannerVideo.ogg')}}" type="video/ogg">
+			Your browser does not support the video tag.
+		</video>
+		<!-- ### videoOverlayBlock ### -->
+		<div class="videoOverlayBlock">
+			<div class="txtBlock">
+				<div class="txtSmall">Let's experience PC gaming on the </div>
+				<div class="txtBig">Browser</div>
+			</div>
+			<div class="mainBtnGroup">
+				<a class="btn btnTryOut" href="{{site_url('login')}}"> Try it out </a>
+				<a class="btn btnSignUp" href="{{site_url('register')}}"> Sign up </a>
+			</div>
+		</div>
+		<!-- ### videoControlButtons ### -->
+		<div id="videoControlButtons" class="videoControlButtons">
+			<a class="btnPlay" role="button"> Play </a>
+			<a class="btnPause" role="button"> Pause </a>
+		</div>
+	</section>
+
+
+	<section class="about">
+		<img src="{{images_url('about.png')}}" width="100%">
+	</section>
+
+
+	<!-- ### feedbackBlock ### -->
+	<section class="feedbackBlock">
+		<div class="container">
+			<div class="heading"> We value your feedback! </div>
+			<p class="desc"> Like the experiment? Help us spread the word out! </p>
+			<ul class="iconSet">
+				<span class='st_facebook_large' displayText='Facebook'></span>	
+				<span class='st_googleplus_large' displayText='Google +'></span>
+				<span class='st_twitter_large' displayText='Tweet'> </span>
+			</ul>
+		</div>
+	</section>
+
+	<!-- ### statBlock ### -->
+	<section class="statBlock">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-4 text-center">
+					<a class="stat noTesters" href="http://www.twitch.tv/swyoexp">
+						<span class="val"> 
+							<span class=" glyphicon glyphicon-globe "></span>
+						</span> 
+						<br>
+						<span class="lab">Testers</span>
+					</a>
+				</div>
+				<div class="col-sm-4 text-center">
+					<a class="stat noHomePC" href="http://www.twitch.tv/swyoexp">
+						<span class="val">03</span>
+						<br>
+						<span class="lab">Home PCs</span>
+					</a>
+				</div>
+				<div class="col-sm-4 text-center">
+					<a class="stat noFAQ" href="http://www.twitch.tv/swyoexp">
+						<span class="val"> &infin; </span>
+						<br>
+						<span class="lab"> #FAQ </span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	
+
+
+	<!-- ### rights ### -->
+	<div class="rights">
+		<div class="container">
+			© 2014 All Rights Reserved – <span class="hlight">SevenRE UG</span> | Contact
+		</div>
+	</div>
+
+</div>
+{{/block}}
+
+
+{{block 'script'}} 
+<script> $(document).ready(function() {
+
+	//***************************************************************
+
+	setBannerHeaderSize();
+	$( window ).resize(function() {
+		setBannerHeaderSize();
+	});
+	function setBannerHeaderSize(){
+		var wHeight = $(window).height() - 140 ;
+		var eHeight = $(".bannerHeader").height();
+		var diffHeight = wHeight - eHeight ;
+		if(diffHeight < 60) { diffHeight = 60; }
+
+		$(".bannerHeader").css("padding-top",diffHeight/2);
+		$(".bannerHeader").css("padding-bottom",diffHeight/2);
+	}
+
+	//***************************************************************
+
+	videojs("prototypeVideo").ready(function() 
+	{
+		var prototypeVideo = this;
+		// prototypeVideo.play();
+
+		setVideoSize();
+		$( window ).resize(function() {
+			setVideoSize();
+		});
+
+		$(".btnPause").css("display","block");
+		$(".btnPlay").click(function(){ prototypeVideo.play(); 	$(this).hide(); $(".btnPause").show(); });
+		$(".btnPause").click(function(){ prototypeVideo.pause(); $(this).hide(); $(".btnPlay").show(); });
+
+		function setVideoSize() {
+			var vWidth = $("#prototypeVideoBlock").outerWidth();
+			var vHeight = vWidth/1.75;
+			vHeight = vHeight > 240 ? vHeight : 240 ;
+			prototypeVideo.width(vWidth);
+			prototypeVideo.height(vHeight);
+		}
+	});
+
+	//***************************************************************
+
+}); </script>
+{{/block}}

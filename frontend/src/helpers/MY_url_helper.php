@@ -8,15 +8,23 @@ function getHostUrl()
 	return $url;
 }
 
-if( defined('PRITTY_URL_PREFIX') && PRITTY_URL_PREFIX )
+if( defined('PRETTY_URL_PREFIX') && PRETTY_URL_PREFIX )
 { 
-	function site_url($uri = '')
+	function site_url($uri = '' , $use = TRUE)
 	{
-		$url = getHostUrl();
-		$url .= PRITTY_URL_PREFIX ? PRITTY_URL_PREFIX.'/' : '';
-		$url .= $uri;
+		if($use)
+		{
+			$url = getHostUrl();
+			$url .= PRETTY_URL_PREFIX ? PRETTY_URL_PREFIX.'/' : '';
+			$url .= $uri;
 
-		return $url;
+			return $url;
+		}
+		else
+		{
+			$CI =& get_instance();
+			return $CI->config->site_url($uri);
+		}
 	}
 }
 

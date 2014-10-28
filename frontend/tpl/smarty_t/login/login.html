@@ -1,0 +1,53 @@
+{{extends file="layout/master.html"}}
+
+
+
+{{block 'pgContent'}} 
+<div id="pgContent" class="pgContent pgLogin">
+	<div class="container">
+
+
+		<section class="logRegBlock">
+			<div class="border_frame">
+				<img src="{{images_url('register/border_frame.png')}}">
+			</div>
+
+			<form method="post" id="formLogin" class="formLogin">
+				<div class="formHeader">
+					<img class="icon" src="{{images_url('icon/lock.png')}}">
+					<div class="title">Login</div>
+				</div>
+
+				{{if $ci->form_validation->error_count() > 0}}
+					<div class="validation_errors" style="color: pink;">
+						{{validation_errors()}}
+					</div>
+				{{/if}}
+
+				<div class="fieldSet">
+					<div class="fieldRow">
+						<input class="fInput" type="text" name="playerName" value="{{set_value('playerName')}}" placeholder="player name">
+					</div>
+					<div class="fieldRow">
+						<input class="fInput" type="password" name="password" value="" placeholder="password">
+					</div>
+					<button type="submit" class="btn btnLogin">Login</button>
+				</div>
+
+				
+			</form>
+		</section>
+
+	</div> <!-- container -->
+</div>
+{{/block}}
+
+
+
+{{block 'script'}} 
+<script> $(document).ready(function() {
+
+
+
+}); </script>
+{{/block}}

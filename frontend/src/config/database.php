@@ -47,11 +47,17 @@
 
 $active_record = TRUE;
 
-$db['trackren_school_demo_v1'] = array(
-	'hostname' => 'localhost' ,
-	'username' => 'trackren_admin',
-	'password' => 'trackren_admin',
-	'database' => 'trackren_school_demo_v1',
+$hostname = 'streamDemoV1.db.10890232.hostedresource.com' ;
+$username = 'streamDemoV1' ;
+$password = 'NeerajSaini28!' ;
+$database = 'streamDemoV1' ;
+
+$db['default'] = array(
+	'hostname' => $hostname ,
+	'username' => $username,
+	'password' => $password,
+	'database' => $database,
+
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
@@ -59,12 +65,11 @@ $db['trackren_school_demo_v1'] = array(
 	'cache_on' => FALSE,
 	'cachedir' => '',
 	'char_set' => 'utf8',
-	'dbcollat' => 'utf8_unicode_ci',
+	'dbcollat' => 'utf8_general_ci',
 	'swap_pre' => '',
 	'autoinit' => TRUE,
 	'stricton' => FALSE,
 );
-
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */

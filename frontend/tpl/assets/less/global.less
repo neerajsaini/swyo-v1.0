@@ -1,0 +1,53 @@
+@logoRed : #fa1557;
+@logoBlue : #22c7fc;
+
+
+
+html, body 
+{ 
+	font-family: 'Lato', sans-serif; 
+	font-weight: 300; 
+	color: #ddd;
+	background-color: rgb(17,17,17);
+}
+
+
+
+.txtRed { color: @logoRed; }
+.txtBlue { color: @logoBlue; }
+
+
+.mainBtnGroup 
+{
+	.btn { 
+		border: 1px solid #ddd; 
+		margin: 0px 20px; 
+		font-size: 17px; 
+		font-weight: 300; 
+	}
+	.btnTryOut { 
+		color: @logoBlue; 
+		border-color: @logoBlue; 
+	}
+	.btnTryOut:hover {
+		background-color: @logoBlue;
+		color: #fff;
+	}
+	.btnSignUp { 
+		color: @logoRed; 
+		border-color: @logoRed; 
+	}
+	.btnSignUp:hover {
+		background-color: @logoRed;
+		color: #fff;
+	}
+}
+
+#btnLogout 
+{
+	position: fixed; right: 20px; top: 20px; width: 30px;
+}
+#btnHome 
+{
+	position:fixed; display:block; margin-left: 15px; margin-top:15px;
+}

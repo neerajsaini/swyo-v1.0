@@ -1,0 +1,79 @@
+{{extends file="layout/master.html"}}
+{{block 'pgContent'}} 
+<div class="pgContent">
+	<div class="container">
+		
+
+		<!-- ### Server Params ### -->
+
+		<div class="row">
+			<div class="col-sm-4">
+				<h2>Server Params</h2>
+				<table class="table">
+					{{foreach $systemParam as $key=>$val name="sysParam"}}
+						{{if $smarty.foreach.sysParam.index == 0}} 
+						<tr>
+							<th>KEY</th>
+							<th>VAL</th>
+						</tr>
+						{{/if}}
+						<tr>
+							<td> {{$key}} </td>
+							<td> <b>{{$val}}</b> </td>
+						</tr>
+					{{/foreach}}
+				</table>
+			</div>
+			<div class="col-sm-push-4 col-sm-4">
+				<h2>Counter Params</h2>
+				<table class="table">
+					{{foreach $counterParam as $key=>$val name="cntParam"}}
+						{{if $smarty.foreach.cntParam.index == 0}} 
+						<tr>
+							<th>KEY</th>
+							<th>VAL</th>
+						</tr>
+						{{/if}}
+						<tr>
+							<td> {{$key}} </td>
+							<td> <b>{{$val}}</b> </td>
+						</tr>
+					{{/foreach}}
+				</table>
+			</div>
+		</div>
+
+		
+		<!-- ### Session Players ### -->
+	
+		<div class="row">
+			<div class="col-sm-12">
+				<h2>Session Players</h2>
+				<table class="table">
+					{{foreach $sessionData as $row name="sessData"}}
+						{{if $smarty.foreach.sessData.index == 0}} 
+						<tr>
+							{{foreach $row as $key=>$col}}
+							<th>{{$key}}</th>
+							{{/foreach}}
+						</tr>
+						{{/if}}
+						<tr>
+							{{foreach $row as $key=>$col}}
+							<td> {{$col}} {{if $key=='playerID'}}  ::  {{$playerData[$col].playerName}} {{/if}}  </td>
+							{{/foreach}}
+						</tr>
+					{{foreachelse}}
+						<tr>
+							<td> NO DATA </td>
+						</tr>
+					{{/foreach}}
+				</table>
+			</div>
+		</div>
+
+		
+
+	</div>
+</div>
+{{/block}}
