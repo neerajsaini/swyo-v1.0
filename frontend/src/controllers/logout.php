@@ -42,6 +42,7 @@ class Logout extends MY_Controller
 				case 'PLAY_TIME_OUT':
 					$this->server_slot_model->remove_player($player['playerID']);
 					$this->session_status_log_model->insert(array('SID'=>$player['SID'], 'status'=>'PLAY_TIME_OUT', 'datetime' => date('Y-m-d H:i:s')));
+					$this->counter_param_model->increase('PLAY_TIME_OUT'); 
 				break;
 			}
 		}

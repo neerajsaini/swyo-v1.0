@@ -4,7 +4,7 @@ class MY_Controller extends CI_Controller
 {
 	var $systemParam = array();
 	var $counterParam = array();
-	
+
 	function __construct()
 	{
 		parent::__construct();
@@ -18,9 +18,9 @@ class MY_Controller extends CI_Controller
 	{
 		$this->db = $this->load->database('default' , TRUE);
 		$this->load->model(array( 'my_model'
-			, 'system_param_model', 'counter_param_model' 
-			, 'session_model' , 'session_log_model' , 'session_status_log_model'
-			, 'player_model'
+			,'system_param_model' ,'counter_param_model' ,'server_model' ,'server_slot_model' 
+			,'session_model' ,'session_log_model' ,'session_status_log_model'
+			,'player_model'
 		));
 	}
 

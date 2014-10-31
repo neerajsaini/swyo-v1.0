@@ -38,13 +38,21 @@ class Join extends MY_Controller
 			
 			redirect('wait');
 		} 
-		else if ($player['status'] == 'WAIT') 
+		else
 		{
-			redirect('wait');
-		} 
-		else if ($player['status'] == 'PLAY') 
-		{
-			redirect('playws');
+			$this->session->set_userdata('SID',$player['SID']);
+
+			if ($player['status'] == 'WAIT') 
+			{
+				redirect('wait');
+			} 
+			else if ($player['status'] == 'PLAY') 
+			{
+				redirect('playws');
+			}
+			else if ($player['status'] == 'PLAY_TIME_OUT') {
+				redirect('timeout'); 
+			}
 		}
 	}
 
@@ -86,6 +94,7 @@ class Join extends MY_Controller
 
 		$this->session->set_userdata('SID',$SID);
 		$this->counter_param_model->increase('WAIT');
+		$this->counter_param_model->increase('JOINED');
 	}
 
 	//*********************************************************************

@@ -1,0 +1,70 @@
+{{extends file="layout/master.html"}}
+{{block 'pgContent'}} 
+<a id="btnLogout"  href="{{site_url('logout')}}">
+	<img src="{{images_url('icon/logout.png')}}" width="100%">
+</a>
+
+<a id="btnHome"  href="{{site_url('home')}}">
+	<div class="glyphicon glyphicon-home" style="font-size:32px;"></div>
+</a>
+
+<div class="pgContent pgTimeout text-center">
+
+	<section class="sessExpired">
+		<div class="title"> Hello <span class="txtBlue">{{$ci->session->userdata('playerName')}}</span></div> 
+		<div class="subtitle txtRed"> your session is <span class="txtRed">over</span>  </div>
+		<div> 
+			Thank a lot for taking part in our experiment 
+			<br> please share your experience to make this experiment successful  
+		</div>
+	</section>
+
+	
+	<section class="qaFeedback">
+		<div class="heading">
+			Your Feedback
+		</div>
+		<form class="qaBlock">
+			<table>
+				<tr class="labels">
+					<td class="text-left"> QUESTION </td>
+					<td> YES </td>
+					<td> NO </td>
+				</tr>
+				<tr>
+					<td class="text-left"> Would you like to have a SWYO desktop appfor personal cloud  application (Gaming, Video, Music)? </td>
+					<td> <input type="radio" name="desktop_app" value="yes"> </td>
+					<td> <input type="radio" name="desktop_app" value="no"> </td>
+				</tr>
+				<tr>
+					<td class="text-left"> Will you like a mobile app client that seamlessly connects to the  SWYO desktop app? </td>
+					<td> <input type="radio" name="mobile_app" value="yes"> </td>
+					<td> <input type="radio" name="mobile_app" value="no"> </td>
+				</tr>
+				<tr>
+					<td class="text-left"> A SWYO hardware optimized to bring you personal cloud alive on any HDMI capable screen </td>
+					<td> <input type="radio" name="hdmi_app" value="yes"> </td>
+					<td> <input type="radio" name="hdmi_app" value="no"> </td>
+				</tr>
+				<tr class="labels">
+					<td colspan="3" class="text-left">
+						COMMENT
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3">
+						<textarea class="commentBox" name="comment" rows="5" style="width: 100%;"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3" class="text-right">
+						<button type="submit"> Submit </button>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</section>
+
+</div>
+
+{{/block}}

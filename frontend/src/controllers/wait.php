@@ -12,14 +12,15 @@ class Wait extends MY_Controller
 
 	function index()
 	{
-		$this->player = $this-> session_model->get('playerID' , $this->session->userdata('playerID'));
-		$this->tplData['player'] = $this->player;
-
+		$this->player = $this->session_model->get('playerID' , $this->session->userdata('playerID'));
+		
 		if( ($redirect = $this->checkRedirect()) !== FALSE ) {
 			redirect($redirect);
 		}
-		$this->session_model->updateTimestamp('SID', $this-> session->userdata('SID'));
 
+		$this->session_model->update_updateTimestamp('playerID', $this-> session->userdata('playerID'));
+
+		$this->tplData['player'] = $this->player;
 		$this->smarty->view('wait/wait', $this->tplData);
 	}
 
@@ -29,7 +30,10 @@ class Wait extends MY_Controller
 	{
 		$redirect = false;
 
-		if(count($this->player) == 0) {
+		if(!$this->isLoggedIn()) { 
+			$redirect = 'login' ;
+		}
+		else if(count($this->player) == 0) {
 			$redirect = 'join' ;
 		} 
 		else if ($this->player['status'] == 'PLAY') {
@@ -47,7 +51,7 @@ class Wait extends MY_Controller
 
 	function ajx_checkStatus()
 	{
-		$this->session_model->updateTimestamp('SID', $this-> session->userdata('SID'));
+		$this->session_model->update_updateTimestamp('SID', $this-> session->userdata('SID'));
 		$this->player = $this->session_model->get('playerID' , $this->session->userdata('playerID'));
 		$qIndex = $this->get_queue_index_data();
 

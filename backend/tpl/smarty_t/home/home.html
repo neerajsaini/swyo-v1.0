@@ -1,22 +1,24 @@
 {{extends file="layout/master.html"}}
 {{block 'pgContent'}} 
+
+<style>
+	h2 { padding: 10px; background-color: #333; color: #fff; font-size: 18px; margin-bottom:0; }
+	tr { background-color: #eee; border-bottom: 1px solid #ddd; }
+	td, th { padding: 5px; }
+	th { background-color: #ccc; }
+</style>
+
 <div class="pgContent">
 	<div class="container">
 		
 
-		<!-- ### Server Params ### -->
+		<!-- ### Params ### -->
 
 		<div class="row">
 			<div class="col-sm-4">
-				<h2>Server Params</h2>
+				<h2>Counter Params</h2>
 				<table class="table">
-					{{foreach $systemParam as $key=>$val name="sysParam"}}
-						{{if $smarty.foreach.sysParam.index == 0}} 
-						<tr>
-							<th>KEY</th>
-							<th>VAL</th>
-						</tr>
-						{{/if}}
+					{{foreach $counterParam as $key=>$val name="cntParam"}}
 						<tr>
 							<td> {{$key}} </td>
 							<td> <b>{{$val}}</b> </td>
@@ -24,16 +26,10 @@
 					{{/foreach}}
 				</table>
 			</div>
-			<div class="col-sm-push-4 col-sm-4">
-				<h2>Counter Params</h2>
+			<div class="col-sm-push-1 col-sm-4">
+				<h2>Server Params</h2>
 				<table class="table">
-					{{foreach $counterParam as $key=>$val name="cntParam"}}
-						{{if $smarty.foreach.cntParam.index == 0}} 
-						<tr>
-							<th>KEY</th>
-							<th>VAL</th>
-						</tr>
-						{{/if}}
+					{{foreach $systemParam as $key=>$val name="sysParam"}}
 						<tr>
 							<td> {{$key}} </td>
 							<td> <b>{{$val}}</b> </td>
@@ -43,12 +39,34 @@
 			</div>
 		</div>
 
-		
-		<!-- ### Session Players ### -->
-	
+		<!-- ### Server Slots ### -->
+
 		<div class="row">
 			<div class="col-sm-12">
-				<h2>Session Players</h2>
+				<h2> Server Slots </h2>
+				<table class="table">
+					<tr>
+						<th> Server Slot </th>
+						<th> Player </th>
+						<th> Premium </th>
+					</tr>
+					{{foreach $serverSlotData as $row}}
+					<tr>
+						<td> {{$row.serverName}} ({{$row.serverID}}#{{$row.slotNo}}) </td>
+						<td> {{$row.playerName}} {{if $row.playerID}} ({{$row.playerID}}) {{/if}} </td>
+						<td> {{if $row.playerID}} {{if $row.isPremium}} yes {{else}} no  {{/if}} {{/if}} </td>
+					</tr>
+					{{/foreach}}
+				</table>
+			</div>
+		</div>
+
+
+		<!-- ### Session Players ### -->
+
+		<div class="row">
+			<div class="col-sm-12">
+				<h2> Session Players </h2>
 				<table class="table">
 					{{foreach $sessionData as $row name="sessData"}}
 						{{if $smarty.foreach.sessData.index == 0}} 
@@ -60,13 +78,45 @@
 						{{/if}}
 						<tr>
 							{{foreach $row as $key=>$col}}
-							<td> {{$col}} {{if $key=='playerID'}}  ::  {{$playerData[$col].playerName}} {{/if}}  </td>
+							<td> {{if $key=='playerID'}} {{$playerData[$col].playerName}} # {{/if}} {{$col}} </td>
 							{{/foreach}}
 						</tr>
 					{{foreachelse}}
 						<tr>
 							<td> NO DATA </td>
 						</tr>
+					{{/foreach}}
+				</table>
+			</div>
+		</div>
+
+		<!-- ### Server Info ### --> 
+
+		<br><br><br><br>
+
+		<div class="row">
+			<div class="col-sm-12">
+				<h2> Server Info </h2>
+				<table class="table">
+					<tr>
+						<th> Server </th>
+						<th> serverIP </th>
+						<th> videoServerIP </th>
+						<th> applicationID </th>
+						<th> videoID </th>
+						<th> videoServerPort </th>
+						<th> htmlFile </th>
+					</tr>
+					{{foreach $serverData as $row}}
+					<tr>
+						<td> {{$row.serverName}} # {{$row.serverID}} </td>
+						<td> {{$row.serverIP}} </td>
+						<td> {{$row.videoServerIP}} </td>
+						<td> {{$row.applicationID}} </td>
+						<td> {{$row.videoID}} </td>
+						<td> {{$row.videoServerPort}} </td>
+						<td> {{$row.htmlFile}} </td>
+					</tr>
 					{{/foreach}}
 				</table>
 			</div>

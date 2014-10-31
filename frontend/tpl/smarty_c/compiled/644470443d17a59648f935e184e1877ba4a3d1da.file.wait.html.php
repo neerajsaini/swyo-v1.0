@@ -1,13 +1,13 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2014-10-28 13:48:11
+<?php /* Smarty version Smarty-3.1.19, created on 2014-10-31 08:59:48
          compiled from "/Applications/AMPPS/www/stream/v1.0/frontend/tpl/smarty_t/wait/wait.html" */ ?>
-<?php /*%%SmartyHeaderCode:42687633544f908b248639-60832139%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:1131061233545341743dbab0-86348908%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '644470443d17a59648f935e184e1877ba4a3d1da' => 
     array (
       0 => '/Applications/AMPPS/www/stream/v1.0/frontend/tpl/smarty_t/wait/wait.html',
-      1 => 1414500426,
+      1 => 1414656337,
       2 => 'file',
     ),
     '299805cb9dca5b4ec7b5fb34604fce86d367f6ea' => 
@@ -17,15 +17,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '42687633544f908b248639-60832139',
+  'nocache_hash' => '1131061233545341743dbab0-86348908',
   'function' => 
   array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.19',
-  'unifunc' => 'content_544f908b2c7cd4_74690752',
+  'unifunc' => 'content_54534174471498_35129662',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_544f908b2c7cd4_74690752')) {function content_544f908b2c7cd4_74690752($_smarty_tpl) {?><!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_54534174471498_35129662')) {function content_54534174471498_35129662($_smarty_tpl) {?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -187,7 +187,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
      
 <script> $(document).ready(function() {
 
-	check_status(false , 5000);
+	check_status(true , 20*1000);
+	
 	function check_status(run_loop , pulse_rate) {
 		$.ajax({
 			type: "GET",
@@ -210,7 +211,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 				}
 
 				if(run_loop==true){
-					setTimeout(function(){ check_status(run_loop, pulse_rate) }, pulse_rate);
+					setTimeout(function() { 
+						check_status(run_loop, pulse_rate);
+					}, pulse_rate);
 				}
 			}
 		});

@@ -1,0 +1,46 @@
+    
+    <link href="{{assets_url('css/main.css')}}" rel="stylesheet">
+
+    <!-- PAGE OVERLAY BEFORE PLAY
+    ********************************************* -->
+
+    <div id="pgOverlayBeforePlay" style="position:absolute; z-index:999;">
+        <div class="heading"> 
+            <div class="title">
+                <span class="txtRed"> Redirecting to </span> 
+                <span class="txtBlue"> game </span>
+            </div>
+            <div>
+                if your luck betrays <span class="txtBlue">refresh</span> the page
+             </div>
+         </div>
+         
+         <div class="imgLoading">
+            <img src="{{images_url('wait/load.gif')}}" alt="">
+        </div>
+        <br>
+        <div class="">
+            <span class="">You can</span>
+            <span class="txtRed">test play</span>
+            <span>for</span>
+            <span class="blue">10 min!</span>
+        </div>
+    </div>
+
+    <!-- SCRIPT
+    *********************************************************** -->
+
+    <script>
+        $(document).ready(function(){
+            $('#gamePanel .gpHandle').click(function(){
+                $('#gamePanel .gpContent').slideToggle();
+            });
+
+            setTimeout(function(){
+                $("#pgOverlayBeforePlay").hide();
+                    setTimeout(function(){
+                        $('#gamePanel .gpContent').slideToggle();
+                    },2000);
+            },10000);
+        });
+    </script>
