@@ -114,7 +114,7 @@ class Process extends MY_Controller
 
 	private function played_out()
 	{
-		$this->players['played_out'] = $this->session_model->get_players_played_out(60);
+		$this->players['played_out'] = $this->session_model->get_players_played_out(20);
 		
 		if($this->execute)
 		{

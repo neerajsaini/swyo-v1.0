@@ -17,8 +17,8 @@ class MY_Controller extends CI_Controller
 		$this->load->model(array( 'my_model'
 			, 'system_param_model', 'counter_param_model' 
 			, 'server_slot_model' , 'session_log_model' , 'session_status_log_model'
-			, 'session_model'
-			, 'player_model'
+			, 'session_model' , 'qa_feedback_model'
+			, 'player_model' , 'playerinfo_model'
 		));
 	}
 

@@ -1,13 +1,13 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2014-10-27 16:19:56
+<?php /* Smarty version Smarty-3.1.19, created on 2014-10-31 13:14:32
          compiled from "/Applications/AMPPS/www/stream/v1.0/frontend/tpl/smarty_t/register/register.html" */ ?>
-<?php /*%%SmartyHeaderCode:1151924815544e629cb1a269-24801069%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:141115118754537d2844bcc1-15257340%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'ff58d5c861ed8064cafd74f1f9b01c8d1635234e' => 
     array (
       0 => '/Applications/AMPPS/www/stream/v1.0/frontend/tpl/smarty_t/register/register.html',
-      1 => 1414422939,
+      1 => 1414757196,
       2 => 'file',
     ),
     '299805cb9dca5b4ec7b5fb34604fce86d367f6ea' => 
@@ -17,15 +17,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1151924815544e629cb1a269-24801069',
+  'nocache_hash' => '141115118754537d2844bcc1-15257340',
   'function' => 
   array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.19',
-  'unifunc' => 'content_544e629cb91ec6_49054612',
+  'unifunc' => 'content_54537d284c3276_11301473',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_544e629cb91ec6_49054612')) {function content_544e629cb91ec6_49054612($_smarty_tpl) {?><!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_54537d284c3276_11301473')) {function content_54537d284c3276_11301473($_smarty_tpl) {?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -82,7 +82,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 				</div>
 
 				<?php if ($_smarty_tpl->tpl_vars['ci']->value->form_validation->error_count()>0) {?>
-					<div class="validation_errors" style="color: pink;">
+					<div class="validation_errors" style="color:pink; margin-bottom:40px;">
 						<?php echo validation_errors();?>
 
 					</div>

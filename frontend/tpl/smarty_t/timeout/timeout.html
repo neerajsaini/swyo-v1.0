@@ -24,7 +24,12 @@
 		<div class="heading">
 			Your Feedback
 		</div>
-		<form class="qaBlock">
+		<form method="post" class="qaBlock">
+			{{if $ci->form_validation->error_count() > 0}}
+				<div class="validation_errors" style="color: red; backbround: pink;">
+					{{validation_errors()}}
+				</div>
+			{{/if}}
 			<table>
 				<tr class="labels">
 					<td class="text-left"> QUESTION </td>
@@ -32,19 +37,19 @@
 					<td> NO </td>
 				</tr>
 				<tr>
-					<td class="text-left"> Would you like to have a SWYO desktop appfor personal cloud  application (Gaming, Video, Music)? </td>
-					<td> <input type="radio" name="desktop_app" value="yes"> </td>
-					<td> <input type="radio" name="desktop_app" value="no"> </td>
+					<td class="text-left"> 1)  Would you like to have a SWYO desktop appfor personal cloud  application (Gaming, Video, Music)? </td>
+					<td> <input type="radio" name="desktop_app" value="yes" {{set_radio('desktop_app', 'yes')}} > </td>
+					<td> <input type="radio" name="desktop_app" value="no" {{set_radio('desktop_app', 'no')}} > </td>
 				</tr>
 				<tr>
-					<td class="text-left"> Will you like a mobile app client that seamlessly connects to the  SWYO desktop app? </td>
-					<td> <input type="radio" name="mobile_app" value="yes"> </td>
-					<td> <input type="radio" name="mobile_app" value="no"> </td>
+					<td class="text-left"> 2) Will you like a mobile app client that seamlessly connects to the  SWYO desktop app? </td>
+					<td> <input type="radio" name="mobile_app" value="yes" {{set_radio('mobile_app', 'yes')}} > </td>
+					<td> <input type="radio" name="mobile_app" value="no" {{set_radio('mobile_app', 'no')}} > </td>
 				</tr>
 				<tr>
-					<td class="text-left"> A SWYO hardware optimized to bring you personal cloud alive on any HDMI capable screen </td>
-					<td> <input type="radio" name="hdmi_app" value="yes"> </td>
-					<td> <input type="radio" name="hdmi_app" value="no"> </td>
+					<td class="text-left"> 3) A SWYO hardware optimized to bring you personal cloud alive on any HDMI capable screen </td>
+					<td> <input type="radio" name="hdmi" value="yes" {{set_radio('hdmi', 'yes')}} > </td>
+					<td> <input type="radio" name="hdmi" value="no" {{set_radio('hdmi', 'no')}} > </td>
 				</tr>
 				<tr class="labels">
 					<td colspan="3" class="text-left">
@@ -53,12 +58,12 @@
 				</tr>
 				<tr>
 					<td colspan="3">
-						<textarea class="commentBox" name="comment" rows="5" style="width: 100%;"></textarea>
+						<textarea class="commentBox" name="comment" rows="5" style="width: 100%;">{{$smarty.post.comment|default:''}}</textarea>
 					</td>
 				</tr>
 				<tr>
 					<td colspan="3" class="text-right">
-						<button type="submit"> Submit </button>
+						<button class="btn btn-danger" type="submit"> Submit </button>
 					</td>
 				</tr>
 			</table>
