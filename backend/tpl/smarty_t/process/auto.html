@@ -1,0 +1,26 @@
+{{extends file="layout/master.html"}}
+
+
+
+{{block 'pgContent'}}
+	
+	<h1 class="text-center" style="color:red;"> {{$smarty.now|date_format:'%H:%M:%S'}} </h1>
+	{{foreach $players 'data' 'status' }}
+		<h3>{{$status}}</h3>
+		<pre>{{print_r($data)}}</pre>
+	{{/foreach}}
+
+{{/block}}
+
+
+
+
+{{block 'script'}}
+<script> $(document).ready(function() {
+
+	setTimeout(function() {
+		location.reload();
+	}, 10*1000);
+
+}); </script>
+{{/block}}

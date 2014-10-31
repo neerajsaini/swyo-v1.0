@@ -67,7 +67,8 @@ class Process extends MY_Controller
 		}
 		else
 		{
-			$this->smarty->view('process/auto');
+			$response['players'] = $this->players;
+			$this->smarty->view('process/auto' , $response);
 		}
 	}
 
