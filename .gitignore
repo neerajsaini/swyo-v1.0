@@ -1,6 +1,10 @@
 
 frontend/tpl/smarty_c/compiled/
 frontend/tpl/smarty_c/cache/
+frontend/tpl/smarty_c/compiled
+frontend/tpl/smarty_c/cache
 
 backend/tpl/smarty_c/compiled/
 backend/tpl/smarty_c/cache/
+backend/tpl/smarty_c/compiled
+backend/tpl/smarty_c/cache
