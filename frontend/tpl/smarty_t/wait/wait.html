@@ -116,7 +116,7 @@
 			url: '{{site_url("wait/ajx_checkStatus")}}',
 		  	dataType: 'json',
 			success: function(response) { 
-				console.log(response); 
+				// console.log(response); 
 				if(response.redirect != false) {
 					window.location.href = "{{site_url('"+response.redirect+"')}}" ;
 				}

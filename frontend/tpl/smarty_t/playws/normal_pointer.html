@@ -287,7 +287,7 @@ $(document).ready(function() {
     		websocket.send("np"+playerName);
     	}
     	else {
-    		console.log(websocket);
+    		// console.log(websocket);
     		setTimeout(function(){ send_player_name(playerName) }, 30*1000);
     	}
     } 
@@ -299,7 +299,7 @@ $(document).ready(function() {
             url: '{{site_url("playws/ajx_checkStatus")}}',
             dataType: 'json',
             success: function(response){ 
-                console.log(response); 
+                // console.log(response); 
                 if(response.redirect != false) {
                 	websocket.onclose = function () {};
 					websocket.close();
@@ -312,10 +312,10 @@ $(document).ready(function() {
                 }
             },
 		    error: function(response){
-		    	console.log(response); 
-				//websocket.onclose = function () {};
-				//websocket.close();
-				//window.location.href = '{{site_url("logout")}}';
+		    	// console.log(response); 
+				websocket.onclose = function () {};
+				websocket.close();
+				window.location.href = '{{site_url("logout")}}';
 		    }
         });
     } 

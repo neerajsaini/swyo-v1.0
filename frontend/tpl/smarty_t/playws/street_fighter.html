@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+	<title>Play @ SWYO</title>
+	
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+<script type="text/javascript" src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>
+<script type="text/javascript" src="http://releases.flowplayer.org/js/flowplayer-3.2.13.min.js"></script>
+
+   
+</head>
+
+<body style="overflow: hidden"; onresize="setSizes()">
+
+	{{include file="playws/playws.html"}}
+
+	<div onmousedown="event.preventDefault ? event.preventDefault() : event.returnValue = false" style="position: absolute; z-index:10;width:100%;height:100%;left: 0px; top: 0px;overflow:hidden;" >
+		<object type="img/gif">
+			<img src="{{images_url('transparent.gif')}}" width="100%" height="100%" id="lockgif"></img>
+		</object>
+	</div>
+	<div style="position: absolute;width:100%;height:100%;left: 0px; top: 0px;z-index:0;overflow:hidden;" id="player"></div>    
+	
+	
+	
+<!--  JANIS SCRIPT
+############################################################ -->
+<script type="text/javascript">
+
+var websocket;
+var serverData;
+var slotNo;
+
+ $(function() {
+	serverData = "ws://"+"{{$serverData['serverIP']}}"+":1235";	
+	slotNo = {{$serverData['slotNo']}};
+	window.WebSocket = window.WebSocket || window.MozWebSocket;
+       	websocket = new WebSocket(serverData, 'interaction-protocol');
+ });
+
+$f("player", 
+	{
+	src: "http://releases.flowplayer.org/swf/flowplayer-3.2.18.swf",
+	wmode: "opaque"
+	}, 
+	{ 
+		clip: {
+			url: '{{$serverData.videoID}}',
+			provider: 'rtmp', 
+			live: true, 
+			scaling: 'scale', 
+			bufferLength: 0.0, 
+			bufferTime: 0.0, 
+			autoPlay: true
+		},
+		plugins: {
+			controls:null,
+			rtmp: { 
+				all:false,
+				url: "flowplayer.rtmp-3.2.13.swf",
+				inBufferSeek:false,
+				netConnectionUrl: 'rtmp://{{$serverData.videoServerIP}}:{{$serverData.videoServerPort}}/{{$serverData.applicationID}}/' 
+			},
+		},
+		canvas: {
+			backgroundGradient: 'none'
+		}		
+	});
+
+
+var Key = {
+  pressed: {},
+  
+  isDown: function(keyCode) {
+    return this.pressed[keyCode];
+  },
+
+   sendKeyPressed: function(event) {
+   var keyCode = event.keyCode;
+	if(!(Key.isDown(keyCode)))
+	{	
+		//First time pressed, send to server
+		this.pressed[keyCode] = true;
+		websocket.send("p"+slotNo+"kbd"+keyCode);
+	}
+  },
+
+  sendKeyReleased: function(event) {
+	var keyCode = event.keyCode;
+	if(Key.isDown(keyCode))
+	{	
+		//Key released, send to server
+		delete this.pressed[keyCode];
+		websocket.send("p"+slotNo+"kbu"+keyCode);
+	}
+  }
+  
+};
+
+document.addEventListener('keyup', function(event) { Key.sendKeyReleased(event); }, false);
+document.addEventListener('keydown', function(event) { Key.sendKeyPressed(event); }, false);
+
+</script>
+
+<!--  NEERAJ
+############################################################ -->
+<script> 
+
+	$(document).ready(function() {
+		send_player_name("{{$playerName}}");
+		check_status(true , 20*1000);
+	});
+	
+
+	function send_player_name(playerName)
+    {
+    	if(websocket.readyState === 1) {
+    		websocket.send("np"+playerName);
+    	}
+    	else {
+    		console.log(websocket);
+    		setTimeout(function(){ send_player_name(playerName) }, 30*1000);
+    	}
+    } 
+
+    function check_status(run_loop , pulse_rate) 
+    {
+        $.ajax({
+            type: "GET",
+            url: '{{site_url("playws/ajx_checkStatus")}}',
+            dataType: 'json',
+            success: function(response){ 
+                console.log(response); 
+                if(response.redirect != false) {
+                	websocket.onclose = function () {};
+					websocket.close();
+					window.location.href = "{{site_url('"+response.redirect+"')}}" ;
+				}
+                if(run_loop==true){
+                    setTimeout(function() { 
+						check_status(run_loop, pulse_rate);
+					}, pulse_rate);
+                }
+            },
+		    error: function(response){
+		    	console.log(response); 
+				websocket.onclose = function () {};
+				websocket.close();
+				window.location.href = '{{site_url("logout")}}';
+		    }
+        });
+    } 
+</script>
+
+
+   </body>
+</html>
