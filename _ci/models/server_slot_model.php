@@ -28,14 +28,29 @@ class Server_slot_model extends MY_Model
             ->get()->row_array();
     }
 
+    function count_players()
+    {
+        return $this->db->where('playerID IS NOT NULL')->count_all_results($this->table);
+    }
 
     function get_slots_data()
+    {
+        return $this->db
+            ->select('sslot.*, serverName')
+            ->from('serverSlot AS sslot')
+            ->join('server', 'sslot.serverID = server.serverID', 'left')
+            ->get()->result_array();
+    }
+
+
+    function get_active_slots_data()
     {
         return $this->db
             ->select('sslot.*, playerName, isPremium, serverName')
             ->from('serverSlot AS sslot')
             ->join('server', 'sslot.serverID = server.serverID', 'left')
             ->join('player', 'sslot.playerID = player.playerID', 'left')
+            ->where('isActive' , 1)
             ->get()->result_array();
     }
 

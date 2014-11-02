@@ -29,7 +29,23 @@ class Session_model extends MY_Model
 			->get($this->table)->row_array();
 	}
 
+	function get_all_waiting()
+	{
+		$now = date('Y-m-d H:i:s');
+		$waitingTime = "UNIX_TIMESTAMP('{$now}') - UNIX_TIMESTAMP(startTimestamp) AS waitingTime";
+
+		$result = $this->db
+			->select("session.*, player.* , $waitingTime")
+			->from('session')
+			->join('player', 'session.playerID=player.playerID', 'left')
+			->where('session.status','WAIT')
+			->get()->result_array();
+
+		return $result;
+	}
+
 	#######################################################################
+	## PROCESS HELPERS
 	#######################################################################
 
 	function get_players_waiting($limit)

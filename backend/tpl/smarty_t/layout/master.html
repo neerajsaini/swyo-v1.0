@@ -15,6 +15,9 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <!-- ### CSS ### -->
+    <link href="{{assets_url('css/main.css')}}?{{$smarty.now}}" rel="stylesheet">
 </head>
 <body>
 
@@ -38,17 +41,14 @@
                 <!-- navbar-collapse -->
                 <div class="collapse navbar-collapse" id="mainNav">
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="{{if $ci->uri->segment(1) == 'home'}} active {{/if}}"><a href="{{site_url('home')}}">home</a></li>
+                        <li class="{{if $ci->uri->segment(1) == 'live'}} active {{/if}}"><a href="{{site_url('live')}}">live</a></li>
+                        <li class="{{if $ci->uri->segment(1) == 'server'}} active {{/if}}"><a href="{{site_url('server')}}">server</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Process<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="{{site_url('process/manual/0')}}">Manual(0)</a></li>
                                 <li><a href="{{site_url('process/manual/1')}}">Manual(1)</a></li>
                                 <li><a href="{{site_url('process/auto')}}">Auto</a></li>
-                                <!-- <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">One more separated link</a></li> -->
                             </ul>
                         </li>
                         <li class="dropdown">

@@ -1,0 +1,93 @@
+{{extends file="layout/master.html"}}
+{{block 'pgContent'}} 
+<div class="pgContent">
+	<div class="container">
+
+
+		<div class="row">
+			<div class="col-sm-6">
+				<h2> SYSTEM PARAMS </h2>
+				<table class="table table-hover">
+					<thead>
+					<tr>
+						<th> Param </th>
+						<th> Val </th>
+						<th> &nbsp; </th>
+					</tr>
+					</thead>
+					<tbody>
+					{{foreach $systemParam as $key=>$val}}
+					<tr>
+						<td>{{$key}}</td>
+						<td> <b>{{$val}}</b> </td>
+						<td> &nbsp; </td>
+					</tr>
+					{{/foreach}}
+					</tbody>
+				</table>
+			</div>
+			<div class="col-sm-6">
+				<h2> SLOTS INFO </h2>
+				<table class="table table-hover">
+					<thead>
+					<tr>
+						<th> Server </th>
+						<th> Slot </th>
+						<th> isActive </th>
+						<th> &nbsp; </th>
+					</tr>
+					</thead>
+					<tbody>
+					{{foreach $slotsData as $row}}
+					<tr class="{{if $row.isActive == 1}} success {{else}} danger {{/if}}">
+						<td> ({{$row.serverID}}) {{$row.serverName}} </td>
+						<td> {{$row.slotNo}}  </td>
+						<td> {{$row.isActive}}  </td>
+						<td> &nbsp; </td>
+					</tr>
+					{{/foreach}}
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<h2 class="col-sm-12"> SERVER INFO </h2>
+			<div class="col-sm-12 table-responsive">
+				<table class="table table-hover">
+					<thead>
+					<tr>
+						<th> Server </th>
+						<th> serverIP </th>
+						<th> videoServerIP </th>
+						<th> applicationID </th>
+						<th> videoID </th>
+						<th> videoPort </th>
+						<th> htmlFile </th>
+						<th> &nbsp; </th>
+					</tr>
+					</thead>
+					<tbody>
+					{{foreach $serverData as $row}}
+					<tr>
+						<td> ({{$row.serverID}}) {{$row.serverName}}  </td>
+						<td> {{$row.serverIP}} </td>
+						<td> {{$row.videoServerIP}} </td>
+						<td> {{$row.applicationID}} </td>
+						<td> {{$row.videoID}} </td>
+						<td> {{$row.videoServerPort}} </td>
+						<td> {{$row.htmlFile}} </td>
+						<td> &nbsp; </td>
+					</tr>
+					{{/foreach}}
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+
+		
+	</div>
+</div>
+{{/block}}

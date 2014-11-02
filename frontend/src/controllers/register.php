@@ -53,13 +53,11 @@ class Register extends MY_Controller
             );
             $playerID = $this->player_model->insert($playerData);
 
-
             $playerinfo = array_merge($this->getUserLocationInfo(), array(
             	'playerID' => $playerID ,
                 'createDate' => date('Y-m-d H:i:s')
             ));
             $this->playerinfo_model->insert($playerinfo);
-
 
             $this->session->set_userdata(array(
                 'logged_in' => TRUE,
@@ -67,6 +65,8 @@ class Register extends MY_Controller
                 'playerName' => $playerData['playerName']
             ));
 
+            // REDIRECT
+            //----------------------------------------------------
             redirect('join');
         }
         

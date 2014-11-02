@@ -1,0 +1,137 @@
+{{extends file="layout/master.html"}}
+
+{{block 'pgContent'}}
+<div class="pgContent">
+	<div class="container">
+
+		<div class="row">
+			<div class="col-sm-12">
+				<h2> TODAY's STAT </h2>
+				<table class="table">
+					<thead>
+						<tr>
+							<th class="text-left"> JOINED </th>
+							<th class="text-left"> PLAYED </th>
+							<th class="text-left"> PLAY_TIME_OUT </th>
+							<th class="text-left"> PLAY_IDLE_OUT </th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="text-left">
+							<td> {{$todaysLog.JOINED|default:'0'}} </td>
+							<td> {{$todaysLog.PLAY|default:'0'}} </td>
+							<td> {{$todaysLog.PLAY_TIME_OUT|default:'0'}} </td>
+							<td> {{$todaysLog.PLAY_IDLE_OUT|default:'0'}} </td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="col-sm-12">
+				<h2> PLAYING ({{$noPlayersPlaying}}) </h2>
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th> Server Slot </th>
+							<th> Player </th>
+							<th> isPremium </th>
+							<th> &nbsp; </th>
+						</tr>
+					</thead>
+					<tbody>
+						{{foreach $activeSlotsData 'row'}}
+						<tr class="{{if $row.playerID == 1}} success {{/if}}">
+							<td> {{$row.serverName}} ({{$row.serverID}}.{{$row.slotNo}}) </td>
+							<td> {{if $row.playerID}} ({{$row.playerID}}) {{$row.playerName}} {{/if}} </td>
+							<td> {{$row.isPremium}} </td>
+							<td class="text-right"> 
+								{{if $row.playerID}}
+									<button type="button" class="btn_timeout" id="timeout_{{$row.playerID}}"> Timeout </button>
+								{{else}}
+									<button> empty </button>
+								{{/if}}
+							</td>
+						</tr>
+						{{/foreach}}
+					</tbody>
+				</table>
+			</div> <!-- col -->
+		</div> <!-- row -->
+
+
+
+		<div class="row">
+			<div class="col-sm-12">
+				<h2> WAITING ({{count($playersWaiting)}})</h2>
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th> Player </th>
+							<th> Status </th>
+							<th> isPremium </th>
+							<th> inPQueue </th>
+							<th> Joined </th>
+							<th> Waiting </th>
+							<th> &nbsp; </th>
+						</tr>
+					</thead>
+					<tbody>
+						{{foreach $playersWaiting 'row'}}
+						<tr>
+							<td>  ({{$row.playerID}}) {{$row.playerName}} </td>
+							<td> {{$row.status}} </td>
+							<td> {{$row.isPremium}} </td>
+							<td> {{$row.inPQueue}} </td>
+							<td> {{$row.startTimestamp|date_format:"%H:%M (%d,%b)"}} </td>
+							<td> {{if $row.waitingTime lt 60}} {{$row.waitingTime}} sec {{else}} {{ceil($row.waitingTime/60)}} min {{/if}}</td>
+							<td> &nbsp; </td>
+						</tr>
+						{{foreachelse}}
+						<tr>
+							<td colspan="9"> no one is in queue </td>
+						</tr>
+						{{/foreach}}
+					</tbody>
+				</table>
+			</div> <!-- col -->
+		</div> <!-- row -->
+
+
+
+	</div>
+</div>
+{{/block}}
+
+
+
+{{block 'script'}}
+<script> $(document).ready(function() {
+
+	$('.btn_timeout').click(function(){
+		var str = $(this).attr('id');
+		var url  = '{{site_url("live/timeout")}}/'+str;
+
+		$.ajax({
+			type: "GET",
+			url: url,
+		  	dataType: 'json',
+			success: function(response) { 
+				console.log(response); 
+				location.reload();
+			}
+		});
+	});
+
+	// setTimeout(function() {
+	// 	location.reload();
+	// }, 20*1000);
+
+}); </script>
+{{/block}}
+
+
+
+

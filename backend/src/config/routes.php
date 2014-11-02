@@ -40,11 +40,11 @@
 
 if( defined('PRETTY_URL_PREFIX') && PRETTY_URL_PREFIX )
 {
-	$route[PRETTY_URL_PREFIX] = "welcome";
+	$route[PRETTY_URL_PREFIX] = "live";
 	$route[PRETTY_URL_PREFIX.'/(:any)'] = "$1";
 }
 
-$route['default_controller'] = "welcome";
+$route['default_controller'] = "live";
 $route['404_override'] = '';
 
 

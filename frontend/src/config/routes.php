@@ -41,13 +41,13 @@
 
 if(PRETTY_URL_PREFIX !== FALSE)
 {
-	$route[PRETTY_URL_PREFIX] = "welcome";
+	$route[PRETTY_URL_PREFIX] = "home";
 	$route[PRETTY_URL_PREFIX.'/(:any)'] = "$1";
 	$route['404_override'] = '';
 }
 else
 {
-	$route['default_controller'] = "welcome";
+	$route['default_controller'] = "home";
 	$route['404_override'] = '';
 }
 

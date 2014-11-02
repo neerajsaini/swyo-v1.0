@@ -22,7 +22,7 @@ class Home extends MY_Controller
 		$serverData = $this->server_model->get_all();
 		$this->tplData['serverData'] = $serverData;
 
-		$serverSlotData = $this->server_slot_model->get_slots_data();
+		$serverSlotData = $this->server_slot_model->get_active_slots_data();
 		$this->tplData['serverSlotData'] = $serverSlotData;
 		
 		//  echo "<pre>".print_r($serverData, true)."</pre>";
