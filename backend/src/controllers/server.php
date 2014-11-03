@@ -23,4 +23,20 @@ class Server extends MY_Controller
 		//----------------------------------------------
 		$this->smarty->view('server/server', $this->tplData);
 	}
+
+
+	function toggleServerSlotStatus($str)
+	{
+		$part = explode("_", $str);
+		$status = $part[0];
+		$serverID = (int)$part[1];
+		$slotNo = (int)$part[2];
+
+		$isActive = $status == 'activate' ? 1 : 0 ;
+
+		$this->server_slot_model->update_server_slot_status($isActive, $serverID, $slotNo);
+
+		echo json_encode('done');
+	}
+
 }

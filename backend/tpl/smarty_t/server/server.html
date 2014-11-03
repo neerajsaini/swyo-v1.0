@@ -43,14 +43,25 @@
 						<td> ({{$row.serverID}}) {{$row.serverName}} </td>
 						<td> {{$row.slotNo}}  </td>
 						<td> {{$row.isActive}}  </td>
-						<td> &nbsp; </td>
+						<td class="text-right"> 
+							<span class="updating" style="display:none;"> UPDATING ... </span>
+							<button id="deactivate_{{$row.serverID}}_{{$row.slotNo}}" 
+								name="btn_deactivate"
+								class="btn btn-danger btn_deactivate btn_toggleServerSlotStatus {{if $row.isActive == '1'}} dispInline {{else}} dispHide {{/if}}"> 
+								Deactivate 
+							</button> 
+							<button id="activate_{{$row.serverID}}_{{$row.slotNo}}" 
+								name="btn_activate"
+								class="btn btn-success btn_activate btn_toggleServerSlotStatus {{if $row.isActive != '1'}} dispInline {{else}} dispHide {{/if}}"> 
+								Activate 
+							</button> 
+						</td>
 					</tr>
 					{{/foreach}}
 					</tbody>
 				</table>
 			</div>
 		</div>
-
 
 		<div class="row">
 			<h2 class="col-sm-12"> SERVER INFO </h2>
@@ -86,8 +97,33 @@
 			</div>
 		</div>
 
-
-		
 	</div>
 </div>
+{{/block}}
+
+
+
+
+{{block 'script'}}
+<script> $(document).ready(function() {
+
+	$('.btn_toggleServerSlotStatus').click(function(){
+		var thisBtn = $(this);
+		var str = $(this).attr('id');
+		var name = $(this).attr('name');
+		var url  = '{{site_url("server/toggleServerSlotStatus")}}/'+str;
+
+		thisBtn.hide().siblings('.updating').show();
+
+		$.ajax({
+			type: "GET",
+			url: url,
+		  	dataType: 'json',
+			success: function(response) { 
+				thisBtn.siblings('.updating').text('DONE');
+			}
+		});
+	});
+
+}); </script>
 {{/block}}

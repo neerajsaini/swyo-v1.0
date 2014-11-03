@@ -63,4 +63,15 @@ class Server_slot_model extends MY_Model
     {
         return $this->db->where('isActive' , 1)->count_all_results($this->table);
     }
+
+
+    function update_server_slot_status($isActive, $serverID, $slotNo)
+    {
+        $this->db
+            ->set('isActive', $isActive)
+            ->where('serverID',$serverID)->where('slotNo',$slotNo)
+            ->update($this->table);
+    }
+
+
 }

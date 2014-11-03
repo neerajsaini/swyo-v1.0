@@ -49,12 +49,6 @@ function assets_url($uri='')
 	$path = trim($path,'/').'/';
 	return $host.$path.$uri;
 }
-// function assets_url($uri='')
-// {
-// 	$host = getHostUrl();
-// 	$path = trim(str_replace($_SERVER['DOCUMENT_ROOT'], '', ASSETS_PATH),'/').'/';
-// 	return $host.$path.$uri;
-// }
 
 
 
