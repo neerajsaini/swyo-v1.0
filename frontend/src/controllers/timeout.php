@@ -5,7 +5,7 @@ class Timeout extends MY_Controller
 	function __construct()
 	{ 
 		parent::__construct();
-		// if(!$this->isLoggedIn()) { redirect('login'); }
+		if(!$this->isLoggedIn()) { redirect('login'); }
 	}
 
 	function index()
