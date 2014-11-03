@@ -41,10 +41,22 @@ function videos_url($uri='')
 }
 
 
-
 function assets_url($uri='')
 {
 	$host = getHostUrl();
-	$path = trim(str_replace($_SERVER['DOCUMENT_ROOT'], '', ASSETS_PATH),'/').'/';
+	// $path = trim(str_replace($_SERVER['DOCUMENT_ROOT'], '', ASSETS_PATH),'/').'/';
+	$path = substr(ASSETS_PATH, strpos(ASSETS_PATH, DOCUMENT_PUB_FOLDER) + strlen(DOCUMENT_PUB_FOLDER)  );
+	$path = trim($path,'/').'/';
 	return $host.$path.$uri;
 }
+// function assets_url($uri='')
+// {
+// 	$host = getHostUrl();
+// 	$path = trim(str_replace($_SERVER['DOCUMENT_ROOT'], '', ASSETS_PATH),'/').'/';
+// 	return $host.$path.$uri;
+// }
+
+
+
+
+
