@@ -10,16 +10,29 @@
 
 <div class="pgContent pgTimeout text-center">
 
+
+
 	<section class="sessExpired">
-		<div class="title"> Hello <span class="txtBlue">{{$ci->session->userdata('playerName')}}</span></div> 
+
+		<div class="title"> Hello  <span class="txtBlue_">{{$ci->session->userdata('playerName')}}Johny Depp</span></div> 
 		<div class="subtitle txtRed"> your session is <span class="txtRed">over</span>  </div>
+
+		<!-- ### line ### -->
+		<br>
+		<img src="{{images_url('wait/line.png')}}" alt="">
+		<br><br>
+
 		<div> 
-			Thank a lot for taking part in our experiment 
-			<br> please share your experience to make this experiment successful  
+			Thanks a lot for taking part in our experiment 
+			<br> please <span class="txtBlue">share your experience</span> to make this experiment successful  
 		</div>
+		<span class="glyphicon glyphicon-chevron-down down-arrow txtBlue"> </span>
 	</section>
 
 	
+
+
+
 	<section class="qaFeedback">
 		<div class="heading">
 			Your Feedback
@@ -34,10 +47,10 @@
 				<tr class="labels">
 					<td class="text-left"> QUESTION </td>
 					<td> YES </td>
-					<td> NO </td>
+					<td class="txtRed"> NO </td>
 				</tr>
 				<tr>
-					<td class="text-left"> 1)  Would you like to have a SWYO desktop appfor personal cloud  application (Gaming, Video, Music)? </td>
+					<td class="text-left"> 1)  Would you like to have a SWYO desktop app for personal cloud  application (Gaming, Video, Music)? </td>
 					<td> <input type="radio" name="desktop_app" value="yes" {{set_radio('desktop_app', 'yes')}} > </td>
 					<td> <input type="radio" name="desktop_app" value="no" {{set_radio('desktop_app', 'no')}} > </td>
 				</tr>
@@ -53,7 +66,7 @@
 				</tr>
 				<tr class="labels">
 					<td colspan="3" class="text-left">
-						COMMENT
+						YOUR SUGGESTION
 					</td>
 				</tr>
 				<tr>
@@ -63,12 +76,39 @@
 				</tr>
 				<tr>
 					<td colspan="3" class="text-right">
-						<button class="btn btn-danger" type="submit"> Submit </button>
+						<button class="btn btn-default" type="submit"> Submit </button>
 					</td>
 				</tr>
 			</table>
 		</form>
 	</section>
+
+	<!-- ### feedbackBlock ### -->
+	<section class="feedbackBlock">
+		<div class="container">
+			<p class="desc"> Like the experiment? Help us spread the word out! </p>
+			<ul class="iconSet">
+				<span class='st_facebook_large' displayText='Facebook'></span>	
+				<span class='st_googleplus_large' displayText='Google +'></span>
+				<span class='st_twitter_large' displayText='Tweet'> </span>
+			</ul>
+		</div>
+	</section>
+
+	<!-- ### rights ### -->
+	<div class="rights">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 text-left">
+					Copyright © 2014 Seven RE UG (haftungbeschränkt). All Rights Reserved.
+				</div>
+				<div class="col-sm-6 text-right">
+					<a href="http://www.seven-re.com" class="sre"> Seven RE </a> 
+					| <a class="contact" href="http://www.seven-re.com/sre/about"> Contact </a>
+				</div>
+			</div>
+		</div>
+	</div>
 
 </div>
 

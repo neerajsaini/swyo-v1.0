@@ -125,7 +125,10 @@
 		background: #222;
 		text-align: center;
 		padding: 20px 0px;
-		// .hlight { color: @logoRed; }
+		color: #999;
+		a { display: inline-block; padding: 0 10px; }
+		.sre { color: @logoBlue; }
+		.contact { color: @logoBlue; }
 	}
 
 /* LOGIN REGISTER PAGE
@@ -318,32 +321,49 @@
 	.pgTimeout
 	{
 		color: #999;
-		font-size: 24px;
+		.feedbackBlock {
+			background-color: lighten(@logoRed, 10%);
+			color: #444;
+			padding-top: 30px;
+			padding-bottom: 30px;
+			border-bottom: 1px solid #000;
+			font-size: 28px;
+		}
 	}
 	
 	section.sessExpired
 	{
+		font-size: 22px;
 		padding: 60px 20px;
-		.title { font-size: 2.0em; }
-		// .subtitle { font-size: 1.5em; }
+		padding-bottom: 10px;
+		.title { font-size: 2em; }
+		.subtitle { font-size: 1.2em; }
+
+		.down-arrow { font-size: 28px; margin-top: 10px;}
 	}
 
 	section.qaFeedback
 	{
+		background-color: #eee;
 		.heading {
+			display: none;
 			padding: 30px 0px;
-			font-size: 2.5em;
-			color: #fff;
-			background-color: @logoBlue;
+			font-size: 46px;
+			color: #444;
+			// color: @logoBlue;
+			// background-color: @logoBlue;
+			// background-color: #fff;
 		}
 		.qaBlock {
 			font-size : 20px;
 			padding: 20px 0px;
-			background-color: #fff;
+			// background-color: #fff;
 			color: #333;
 			table {
 				.labels {
 					color: #999;
+					color: darken(@logoBlue, 10%);
+					font-weight: 400;
 				}
 				width: 100%;
 				max-width: 800px;
