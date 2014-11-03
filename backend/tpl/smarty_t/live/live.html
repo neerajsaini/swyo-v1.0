@@ -38,6 +38,7 @@
 							<th> Server Slot </th>
 							<th> Player </th>
 							<th> isPremium </th>
+							<th> PlayTime </th>
 							<th> &nbsp; </th>
 						</tr>
 					</thead>
@@ -47,6 +48,7 @@
 							<td> {{$row.serverName}} ({{$row.serverID}}.{{$row.slotNo}}) </td>
 							<td> {{if $row.playerID}} ({{$row.playerID}}) {{$row.playerName}} {{/if}} </td>
 							<td> {{$row.isPremium}} </td>
+							<td> {{if $row.playTime lt 60}} {{$row.playTime}} sec {{else}} {{ceil($row.playTime/60)}} min {{/if}} </td>
 							<td class="text-right"> 
 								{{if $row.playerID}}
 									<button type="button" class="btn_timeout" id="timeout_{{$row.playerID}}"> Timeout </button>

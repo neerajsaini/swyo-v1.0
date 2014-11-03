@@ -45,11 +45,15 @@ class Server_slot_model extends MY_Model
 
     function get_active_slots_data()
     {
+        $now = date('Y-m-d H:i:s');
+        $playTime = "UNIX_TIMESTAMP('{$now}') - UNIX_TIMESTAMP(startTimestamp) AS playTime";
+
         return $this->db
-            ->select('sslot.*, playerName, isPremium, serverName')
+            ->select("sslot.*, player.playerName, player.isPremium, serverName, $playTime")
             ->from('serverSlot AS sslot')
             ->join('server', 'sslot.serverID = server.serverID', 'left')
             ->join('player', 'sslot.playerID = player.playerID', 'left')
+            ->join('session', 'sslot.playerID = session.playerID', 'left')
             ->where('isActive' , 1)
             ->get()->result_array();
     }

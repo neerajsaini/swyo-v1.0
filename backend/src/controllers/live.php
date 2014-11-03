@@ -14,7 +14,7 @@ class Live extends MY_Controller
 		$playersWaiting = $this->session_model->get_all_waiting();
 		$todaysLog = $this->session_status_log_model->get_todays_log();
 
-		
+	
 
 		//SMARTY
 		//----------------------------------------------
