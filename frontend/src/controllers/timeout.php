@@ -17,9 +17,58 @@ class Timeout extends MY_Controller
 			redirect($redirect);
 		} 
 
+
+		// feedback_questions
+		//----------------------------------------------------
+		$feedback_question = array();
+		$this->form_validation->set_message('required', "required");
+		foreach($this->db->from('feedback_question')->get()->result_array() as $row)
+		{
+			$feedback_question[$row['questionID']]= array(
+				'question' => trim($row['question']),
+				'option1' => trim($row['option1']),
+				'option2' => trim($row['option2']),
+				'option3' => trim($row['option3'])
+			);
+
+			$this->form_validation->set_rules($row['questionID'], $row['questionID'] , 'required' );
+		}
+		$this->smarty->assign('feedback_question', $feedback_question);
+
+		if($this-> form_validation-> run() !== FALSE)
+        {
+        	$datetime = date("Y-m-d H:i:s");
+        	$playerID = $this->session->userdata('playerID');
+        	$playerID = 2;
+
+        	foreach( $feedback_question as $questionID => $row) 
+        	{
+        		$qaBatchData[] = array(
+        			'playerID' => $playerID,
+        			'questionID' => $questionID,
+        			'answer' => $this->input->post($questionID),
+        			'datetime' => $datetime
+        		);
+        	}
+
+        	if($this->input->post('comment')) 
+        	{
+        		$commentData = array(
+        			'playerID' => $playerID,
+        			'comment' => $this->input->post('comment'),
+        			'datetime' => $datetime
+        		);
+        	}
+
+        	$this->db->insert_batch('feedback_answer' , $qaBatchData);
+        	$this->db->insert('feedback_comment' , $commentData);
+
+        	$this->smarty->assign('feedback_recieved', true);
+        }
+
 		// FORM
 		//----------------------------------------------------
-		$this->form_validation->set_message('required', "%s has not been answered");
+		/*$this->form_validation->set_message('required', "%s has not been answered");
 		$this->form_validation->set_rules(array(
             array(
                 'field' => 'desktop_app',
@@ -50,7 +99,7 @@ class Timeout extends MY_Controller
         	);
         	$this->db->insert('qaFeedback' , $data);
             //redirect('logout');
-        }
+        }*/
 
 		// SMARTY
 		//----------------------------------------------------

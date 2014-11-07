@@ -37,6 +37,11 @@
 
 	<section class="qaFeedback">
 		<div class="container">
+			{{if isset($feedback_recieved)}}
+				<br><br>
+				<h1 class="text-center" style="color:#999;" > THANK YOU FOR YOUR FEEDBACK </h1>
+				<br><br>
+			{{else}}
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="heading">
@@ -44,83 +49,42 @@
 					</div>
 				</div>
 				<div class="col-xs-12">
-					<form action="" class="qaBlock">
-						<table class="table">
+					<form action="" method="post" class="qaBlock">
+						<table class="table">	
+							{{foreach $feedback_question as $questionID => $row}}
 							<tr>
-								<td> Did you know how to play the game? </td>
-								<td> <input type="radio"> No </td>
-								<td> <input type="radio"> ButtonSmasher </td>
-								<td> <input type="radio"> Pro </td>
-							</tr><tr>
-								<td> Was the game playable for you? </td>
-								<td> <input type="radio"> Snail </td>
-								<td> <input type="radio"> Potato </td>
-								<td> <input type="radio"> Highfive </td>
-							</tr><tr>
-								<td> How good is your internet connection?  </td>
-								<td> <input type="radio"> Not Sure </td>
-								<td> <input type="radio"> < 6 Mbps </td>
-								<td> <input type="radio"> 50Mbps+ </td>
-							</tr><tr>
+								<td> 
+									{{$row.question}} 
+									<div class="txtRed"> {{if !isset($smarty.post[$questionID])}} required {{/if}} </div>
+								</td>
+								<td> 
+									<input type="radio" name="{{$questionID}}" value="{{$row.option1}}" {{if $smarty.post[$questionID]|default:'' == $row.option1}} checked {{/if}}
+									>  {{$row.option1}} 
+								</td>
+								<td> 
+									<input type="radio" name="{{$questionID}}" value="{{$row.option2}}" {{if $smarty.post[$questionID]|default:'' == $row.option2}} checked {{/if}}
+									> {{$row.option2}} 
+								</td>
+								<td> 
+									<input type="radio" name="{{$questionID}}" value="{{$row.option3}}" {{if $smarty.post[$questionID]|default:'' == $row.option3}} checked {{/if}}
+									> {{$row.option3}} 
+								</td>
+							</tr>
+							{{/foreach}}
+							<tr>
 								<td colspan="4">  
 									Your Sugesstion <br><br>
-									<textarea style="width:100%;" rows="5"></textarea>
+									<textarea name="comment" style="width:100%;" rows="5"></textarea>
 									<br><br>
-									<div class="text-right"> <button> Submit </button>  </div>
+									<div class="text-right"> <button type="submit"> Submit </button>  </div>
 								</td>
 							</tr>
 						</table>
 					</form>
 				</div>
 			</div>
-		</div>
-		<!-- <div class="heading">
-			Please share your experience to help us Improve
-		</div> -->
-		<!-- <form method="post" class="qaBlock">
-			{{if $ci->form_validation->error_count() > 0}}
-				<div class="validation_errors" style="color: red; backbround: pink;">
-					{{validation_errors()}}
-				</div>
 			{{/if}}
-			<table>
-				<tr class="labels">
-					<td class="text-left"> QUESTION </td>
-					<td> YES </td>
-					<td class="txtRed"> NO </td>
-				</tr>
-				<tr>
-					<td class="text-left"> 1)  Would you like to have a SWYO desktop app for personal cloud  application (Gaming, Video, Music)? </td>
-					<td> <input type="radio" name="desktop_app" value="yes" {{set_radio('desktop_app', 'yes')}} > </td>
-					<td> <input type="radio" name="desktop_app" value="no" {{set_radio('desktop_app', 'no')}} > </td>
-				</tr>
-				<tr>
-					<td class="text-left"> 2) Will you like a mobile app client that seamlessly connects to the  SWYO desktop app? </td>
-					<td> <input type="radio" name="mobile_app" value="yes" {{set_radio('mobile_app', 'yes')}} > </td>
-					<td> <input type="radio" name="mobile_app" value="no" {{set_radio('mobile_app', 'no')}} > </td>
-				</tr>
-				<tr>
-					<td class="text-left"> 3) A SWYO hardware optimized to bring you personal cloud alive on any HDMI capable screen </td>
-					<td> <input type="radio" name="hdmi" value="yes" {{set_radio('hdmi', 'yes')}} > </td>
-					<td> <input type="radio" name="hdmi" value="no" {{set_radio('hdmi', 'no')}} > </td>
-				</tr>
-				<tr class="labels">
-					<td colspan="3" class="text-left">
-						YOUR SUGGESTION
-					</td>
-				</tr>
-				<tr>
-					<td colspan="3">
-						<textarea class="commentBox" name="comment" rows="5" style="width: 100%;">{{$smarty.post.comment|default:''}}</textarea>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="3" class="text-right">
-						<button class="btn btn-default" type="submit"> Submit </button>
-					</td>
-				</tr>
-			</table>
-		</form> -->
+		</div>
 	</section>
 
 	<!-- ### feedbackBlock ### -->
