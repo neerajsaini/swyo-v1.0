@@ -305,7 +305,8 @@ document.addEventListener("mouseup", clickEndCallback, false);
 
 $(document).ready(function() {
 
-	document.getElementById("lockgif").style.cursor = 'url("cur686.cur"),auto';
+	var _cursor = "{{images_url('cursor/cursor.png')}}";
+	document.getElementById("lockgif").style.cursor = 'url("'+_cursor+'"),auto';
 
 	$('#lockgif').mouseleave(function(e){
 		websocket.send("cle"+oldX+"w"+vWidth+"y"+oldY+"h"+vHeight);
