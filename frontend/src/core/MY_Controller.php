@@ -55,7 +55,8 @@ class MY_Controller extends CI_Controller
 
         if($third_party == TRUE)
         {
-        	$geoloc = $this->webclient->third_party();
+        	$ip = $basicInfo['IP'] ;
+        	$geoloc = $this->webclient->third_party($ip);
 
         	if($geoloc !==FALSE) 
         	{
