@@ -14,19 +14,21 @@
 
 	<section class="sessExpired">
 
-		<div class="title"> Hello  <span class="txtBlue_">{{$ci->session->userdata('playerName')}}</span></div> 
 		<div class="subtitle txtRed"> Autoprocess: "Legendary player kicked. Moved queue by 1"  </div>
-
+		<br>
+		<div class="title"> You rock  <span class="txtBlue_">{{$ci->session->userdata('playerName')}}Sunny!</span></div> 
+		<div>we hope you enjoyed it</div>
 		<!-- ### line ### -->
 		<br>
 		<img src="{{images_url('wait/line.png')}}" alt="">
 		<br><br>
 
 		<div> 
-			Thanks a lot for taking part in our experiment 
-			<br> please <span class="txtBlue">share your experience</span> to make this experiment successful  
+			Thanks a lot for taking part in our experiment!
+			<!-- <br>We hope you enjoyed it and feel free to tell your friends. -->
+			<br> <!-- please <span class="txtBlue">share your experience</span> and --> feel free to tell your friends.  
 		</div>
-		<span class="glyphicon glyphicon-chevron-down down-arrow txtBlue"> </span>
+		<!-- <span class="glyphicon glyphicon-chevron-down down-arrow txtBlue"> </span> -->
 	</section>
 
 	
@@ -34,10 +36,48 @@
 
 
 	<section class="qaFeedback">
-		<div class="heading">
-			Your Feedback
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="heading">
+						Please share your experience to help us Improve
+					</div>
+				</div>
+				<div class="col-xs-12">
+					<form action="" class="qaBlock">
+						<table class="table">
+							<tr>
+								<td> Did you know how to play the game? </td>
+								<td> <input type="radio"> No </td>
+								<td> <input type="radio"> ButtonSmasher </td>
+								<td> <input type="radio"> Pro </td>
+							</tr><tr>
+								<td> Was the game playable for you? </td>
+								<td> <input type="radio"> Snail </td>
+								<td> <input type="radio"> Potato </td>
+								<td> <input type="radio"> Highfive </td>
+							</tr><tr>
+								<td> How good is your internet connection?  </td>
+								<td> <input type="radio"> Not Sure </td>
+								<td> <input type="radio"> < 6 Mbps </td>
+								<td> <input type="radio"> 50Mbps+ </td>
+							</tr><tr>
+								<td colspan="4">  
+									Your Sugesstion <br><br>
+									<textarea style="width:100%;" rows="5"></textarea>
+									<br><br>
+									<div class="text-right"> <button> Submit </button>  </div>
+								</td>
+							</tr>
+						</table>
+					</form>
+				</div>
+			</div>
 		</div>
-		<form method="post" class="qaBlock">
+		<!-- <div class="heading">
+			Please share your experience to help us Improve
+		</div> -->
+		<!-- <form method="post" class="qaBlock">
 			{{if $ci->form_validation->error_count() > 0}}
 				<div class="validation_errors" style="color: red; backbround: pink;">
 					{{validation_errors()}}
@@ -80,13 +120,13 @@
 					</td>
 				</tr>
 			</table>
-		</form>
+		</form> -->
 	</section>
 
 	<!-- ### feedbackBlock ### -->
 	<section class="feedbackBlock">
 		<div class="container">
-			<p class="desc"> Like the experiment? Help us spread the word out! </p>
+			<p class="desc"> Like the experiment? Help us spread the word!</p>
 			<ul class="iconSet">
 				<span class='st_facebook_large' displayText='Facebook'></span>	
 				<span class='st_googleplus_large' displayText='Google +'></span>

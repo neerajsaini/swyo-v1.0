@@ -45,7 +45,7 @@
 					</thead>
 					<tbody>
 						{{foreach $activeSlotsData 'row'}}
-						<tr class="{{if $row.playerID == 1}} success {{/if}}">
+						<tr class="{{if $row.playerID}} success {{/if}}">
 							<td> {{$row.serverName}} ({{$row.serverID}}.{{$row.slotNo}}) </td>
 							<td> {{if $row.playerID}} ({{$row.playerID}}) {{$row.playerName}} {{/if}} </td>
 							<td> {{$row.isPremium}} </td>
