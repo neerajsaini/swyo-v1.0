@@ -101,7 +101,8 @@ class Process extends MY_Controller
 		// if(TRUE) 
 		if($this->counterParam['WAIT'] > 0) 
 		{
-			$this->players['play_time_out'] = $this->session_model->get_players_play_time_out($this->systemParam['PLAY_TIME_OUT']);
+			$noPlayersWaiting = $this->counterParam['WAIT'];
+			$this->players['play_time_out'] = $this->session_model->get_players_play_time_out($this->systemParam['PLAY_TIME_OUT'] , $noPlayersWaiting);
 		
 			if($this->execute)
 			{

@@ -84,11 +84,12 @@ class Session_model extends MY_Model
 
 	
 
-	function get_players_play_time_out($playTime)
+	function get_players_play_time_out($playTime , $noPlayersWaiting)
 	{
 		$now = date('Y-m-d H:i:s');
 
 		return $this->db
+			->limit($noPlayersWaiting)
 			->select("SID,playerID, UNIX_TIMESTAMP('{$now}') - UNIX_TIMESTAMP(startTimestamp) AS playTime" , FALSE)
 			->where('status','PLAY')
 			->having('playTime > ' , $playTime)
