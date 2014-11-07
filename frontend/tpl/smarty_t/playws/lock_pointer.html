@@ -10,9 +10,10 @@
     
 </head>
 
-<body style="overflow: hidden" onclick="lockPointer();">
+<body style="overflow: hidden">
 
 	{{include file="playws/playws.html"}}
+
 
 	<div style="position: absolute; z-index:999;width:100%;height:100%;left: 0px; top: 0px;overflow:hidden;" >
 		<object type="img/gif" onclick="lockPointer();">
@@ -40,7 +41,7 @@ var serverData;
 	serverData =  "ws://" + "{{$serverData['serverIP']}}" + ":1235";
 
 	window.WebSocket = window.WebSocket || window.MozWebSocket;
-	websocket = new WebSocket( serverData, 'interaction-protocol');
+	websocket = new WebSocket( serverData, 'int-forward');
 });
 
 
@@ -72,7 +73,6 @@ clipURL=getParam("videoID");
 		clip: {
 			url: '{{$serverData.videoID}}',
 			provider: 'rtmp', 
-			accelerated: true,
 			live: true, 
 			scaling: 'fit', 
 			bufferLength: 0.0, 
@@ -87,9 +87,6 @@ clipURL=getParam("videoID");
 				inBufferSeek:false,
 				netConnectionUrl: 'rtmp://{{$serverData.videoServerIP}}:{{$serverData.videoServerPort}}/{{$serverData.applicationID}}/' 
 			} 
-		},
-		onLoad: function() {
-			lockPointer();
 		}
 	});
 
@@ -144,7 +141,7 @@ function moveCallback(e) {
                     0;
 
 
- if(Date.now() - lastMove > 10) {
+ if(Date.now() - lastMove > 25) {
       	  
 	  websocket.send("mx"+movementX+"y"+movementY);
 	  var html = '';
@@ -283,7 +280,7 @@ document.addEventListener('webkitpointerlockerror', pointerLockError, false);
 
 	$(document).ready(function() {
 		send_player_name("{{$playerName}}");
-		check_status(true , 20*1000);
+		check_status(true , 5000);
 	});
 	
 
@@ -293,7 +290,7 @@ document.addEventListener('webkitpointerlockerror', pointerLockError, false);
     		websocket.send("np"+playerName);
     	}
     	else {
-    		setTimeout(function(){ send_player_name(playerName) }, 500);
+    		setTimeout(function(){ send_player_name(playerName) }, 1000);
     	}
     } 
 
@@ -304,7 +301,7 @@ document.addEventListener('webkitpointerlockerror', pointerLockError, false);
             url: '{{site_url("playws/ajx_checkStatus")}}',
             dataType: 'json',
             success: function(response){ 
-                console.log(response); 
+                // console.log(response); 
                 if(response.redirect != false) {
                 	websocket.onclose = function () {};
 					websocket.close();
@@ -317,10 +314,10 @@ document.addEventListener('webkitpointerlockerror', pointerLockError, false);
                 }
             },
             error: function(response){
-            	console.log(response); 
-            	// websocket.onclose = function () {};
-				// websocket.close();
-				// window.location.href = '{{site_url("logout")}}';
+            	// console.log(response); 
+            	websocket.onclose = function () {};
+				websocket.close();
+				window.location.href = '{{site_url("logout")}}';
             }
         });
     } 

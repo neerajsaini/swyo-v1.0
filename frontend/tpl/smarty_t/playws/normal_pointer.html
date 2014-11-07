@@ -54,7 +54,8 @@ var serverData;
  $(function() {
 	serverData = "ws://"+"{{$serverData['serverIP']}}"+":1235";	
 	window.WebSocket = window.WebSocket || window.MozWebSocket;
-       	websocket = new WebSocket(serverData, 'interaction-protocol');
+	// websocket = new WebSocket(serverData, 'interaction-protocol');
+	websocket = new WebSocket(serverData, 'int-forward');
  });
 
 var elem;
@@ -111,7 +112,7 @@ var Key = {
 	if(!(Key.isDown(keyCode)))
 	{	//First time pressed, send to server
 		this.pressed[keyCode] = true;
-		if(websocket.readyState === 1) websocket.send("kbd"+keyCode);
+		websocket.send("kbd"+keyCode);
 		//printKeys();
 	}
   },
@@ -122,7 +123,7 @@ var Key = {
 	{	//Key released, send to server
 		delete this.pressed[keyCode];
 		//printKeys();
-		if(websocket.readyState === 1) websocket.send("kbu"+keyCode);
+		websocket.send("kbu"+keyCode);
 	}
   }
   
@@ -140,7 +141,7 @@ var oldY = -1;
 
 function moveCallback(e) {
 				
- if(Date.now() - lastMove > 5) {
+ if(Date.now() - lastMove > 50) {
 
  if(true)
 	{ 
@@ -151,8 +152,16 @@ function moveCallback(e) {
 					
 	if( ((positionX >=0) && (positionX <=vWidth)) && ( (positionY >= 0) && (positionY <= vHeight)))
 	{
-	 if(websocket.readyState === 1) websocket.send("px"+positionX+"w"+vWidth+"y"+positionY+"h"+vHeight);
-	}	
+	  if(isRButton)
+	  {
+		if(oldX > positionX)
+			websocket.send("mx-10y0");
+		else
+			websocket.send("mx10y0");	
+	  }
+	  else
+	  websocket.send("px"+positionX+"w"+vWidth+"y"+positionY+"h"+vHeight);
+	}
 		
 	 // var html = '';
 	 // html += '<div>' + 'mouse position x : ' + positionX + ', y : ' + positionY + '<br>' + 
@@ -182,12 +191,13 @@ var positionX = (e.clientX ||
 	{
 		switch (e.which) {
 			case 1: // Left mouse button
-				if(websocket.readyState === 1) websocket.send("cls"+positionX+"w"+vWidth+"y"+positionY+"h"+vHeight);
+				 websocket.send("cls"+positionX+"w"+vWidth+"y"+positionY+"h"+vHeight);
 				break;
 			case 2: // Middle mouse button
 				break;
 			case 3: // Right mouse button
-				if(websocket.readyState === 1) websocket.send("crs"+positionX+"w"+vWidth+"y"+positionY+"h"+vHeight);
+				 isRButton = true;
+				 websocket.send("crs"+positionX+"w"+vWidth+"y"+positionY+"h"+vHeight);
 				break;
 			default:
 				alert('You have a strange Mouse!');
@@ -207,12 +217,13 @@ var positionX = (e.clientX ||
 	{
 		switch (e.which) {
 			case 1: // Left mouse button
-				if(websocket.readyState === 1) websocket.send("cle"+positionX+"w"+vWidth+"y"+positionY+"h"+vHeight);
+				 websocket.send("cle"+positionX+"w"+vWidth+"y"+positionY+"h"+vHeight);
 				break;
 			case 2: // Middle mouse button
 				break;
 			case 3: // Right mouse button
-				if(websocket.readyState === 1) websocket.send("cre"+positionX+"w"+vWidth+"y"+positionY+"h"+vHeight);
+				isRButton = false;
+				 websocket.send("cre"+positionX+"w"+vWidth+"y"+positionY+"h"+vHeight);
 				break;
 			default:
 				alert('You have a strange Mouse!');
@@ -225,6 +236,37 @@ $(document).bind('contextmenu', function (e) {
     e.preventDefault();                 // To prevent the default context menu.
 });
 
+var isCtrl = false;
+var isRButton = false;
+
+document.onkeydown = function (e) {
+
+
+	if (e.which == 17)
+	{
+		isCtrl = true;
+		return false;
+	}
+
+
+	if((e.which == 8 )||(e.which == 16)||(e.which == 112)||(e.which == 113)||(e.which == 114)||(e.which == 115)||(e.which == 116)||(e.which == 117)||(e.which == 118)||(e.which == 119)||(e.which == 120)||(e.which == 121)|| (e.which == 122) || (e.which ==123))
+	{
+		return false;
+	}	
+	
+	if (((e.which == 65) || (e.which == 85) || (e.which == 117) || (e.which == 97) || (e.which == 67) || (e.which == 99)) && (isCtrl))
+	{
+		return false;
+	}	
+
+}
+
+document.onkeyup = function (e) {
+	if(e.which == 17)
+		isCtrl = false;
+}
+
+
 var wheel = document.getElementById('wheel');
 
 function mouseScroll(event) {
@@ -236,7 +278,7 @@ function mouseScroll(event) {
         normalized = -(rawAmmount % 3 ? rawAmmount * 10 : rawAmmount / 3);
     }
 	
-	if(websocket.readyState === 1) websocket.send("csa"+normalized);
+	websocket.send("csa"+normalized);
 	
 	
 }
@@ -262,6 +304,16 @@ document.addEventListener("mousedown", clickStartCallback, false);
 document.addEventListener("mouseup", clickEndCallback, false);
 
 $(document).ready(function() {
+
+	document.getElementById("lockgif").style.cursor = 'url("cur686.cur"),auto';
+
+	$('#lockgif').mouseleave(function(e){
+		websocket.send("cle"+oldX+"w"+vWidth+"y"+oldY+"h"+vHeight);
+		websocket.send("cre"+oldX+"w"+vWidth+"y"+oldY+"h"+vHeight);		
+		isRButton = false;
+		isCtrl = false;
+	})
+		
 	$('#lockgif').mousemove(function(e){
 	
 	moveCallback(e);
@@ -277,7 +329,7 @@ $(document).ready(function() {
 
 	$(document).ready(function() {
 		send_player_name("{{$playerName}}");
-		check_status(true , 20*1000);
+		check_status(true , 5000);
 	});
 	
 
@@ -288,7 +340,7 @@ $(document).ready(function() {
     	}
     	else {
     		// console.log(websocket);
-    		setTimeout(function(){ send_player_name(playerName) }, 30*1000);
+    		setTimeout(function(){ send_player_name(playerName) }, 1000);
     	}
     } 
 
