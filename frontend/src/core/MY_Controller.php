@@ -42,7 +42,7 @@ class MY_Controller extends CI_Controller
 
 	//*********************************************************************
 
-	function getUserLocationInfo($third_party=FALSE)
+	function getUserLocationInfo($third_party=TRUE)
 	{
 		$basicInfo = array(
         	'IP'     => $this->webclient->getIP(),
