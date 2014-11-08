@@ -76,7 +76,7 @@ class Join extends MY_Controller
 		//+++++++++++++++++++++++++++
 		$SID = $this->session_model->insert($session_data);
 		//+++++++++++++++++++++++++++
-		$this->session_log_model->insert(array_merge( array('playerID'=>$playerID, 'SID'=>$SID), $userInfo ));
+		$this->session_log_model->insert(array_merge( $userInfo, array('playerID'=>$playerID, 'SID'=>$SID, 'datetime'=>$datetime) ));
 		$this->session_status_log_model->insert(array('SID'=>$SID, 'status'=>'JOINED', 'datetime' => $datetime));
 		$this->session_status_log_model->insert(array('SID'=>$SID, 'status'=>'WAIT', 'datetime' => $datetime));
 		//+++++++++++++++++++++++++++

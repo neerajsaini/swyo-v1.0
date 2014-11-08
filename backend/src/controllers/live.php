@@ -13,8 +13,7 @@ class Live extends MY_Controller
 		$noPlayersPlaying = $this->server_slot_model->count_players();
 		$playersWaiting = $this->session_model->get_all_waiting();
 		$todaysLog = $this->session_status_log_model->get_todays_log();
-
-	
+		$todaysSessionLog = $this->session_log_model->get_todays_log();
 
 		//SMARTY
 		//----------------------------------------------
@@ -23,6 +22,7 @@ class Live extends MY_Controller
 			'noPlayersPlaying' =>  $noPlayersPlaying,
 			'playersWaiting' =>  $playersWaiting,
 			'todaysLog' =>  $todaysLog,
+			'todaysSessionLog' =>  $todaysSessionLog,
 		);
 		//----------------------------------------------
 		$this->smarty->view('live/live', $this->tplData);

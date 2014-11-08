@@ -7,4 +7,13 @@ class Session_log_model extends MY_Model
 	protected $skip_validation = TRUE;
     
 	#######################################################################
+	function get_todays_log()
+	{
+		$result = $this->db->from($this->table)
+    		->where('DATE(datetime) = DATE(NOW())')
+    		->get()->result_array();
+
+    	return $result;
+	}
+	#######################################################################
 }
