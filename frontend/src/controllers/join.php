@@ -62,9 +62,8 @@ class Join extends MY_Controller
 	{
 		$playerID =  $this->session->userdata('playerID');
 		$datetime = date('Y-m-d H:i:s');
-
+		$userInfo = $this->getUserInfo();
 		//+++++++++++++++++++++++++++
-
 		$session_data = array(
 			'status' => 'WAIT',
 			'playerID' => $playerID,
@@ -74,33 +73,13 @@ class Join extends MY_Controller
 			'isPremium' => $isPremium,
 			'inPQueue' => $inPQueue
 		);
-
+		//+++++++++++++++++++++++++++
 		$SID = $this->session_model->insert($session_data);
-
-		$userLocationData = $this->getUserLocationInfo();
-
 		//+++++++++++++++++++++++++++
-		
-		// $session_log_data = array_merge($this->getUserLocationInfo(), array(
-		// 	'playerID' => $playerID
-		// ));
-		
-		// $session_status_log_data = array(
-		// 	'status' => 'WAIT',
-		// 	'datetime' => $datetime
-		// );
-		
-		//$this->session_log_model->insert(array_merge($session_log_data, array('SID'=>$SID)));
-		// $this->session_status_log_model->insert(array_merge($session_status_log_data, array('SID'=>$SID)));
-
-		//+++++++++++++++++++++++++++
-
-		$this->session_log_model->insert(array_merge($userLocationData, array('playerID'=>$playerID, 'SID'=>$SID)));
+		$this->session_log_model->insert(array_merge( array('playerID'=>$playerID, 'SID'=>$SID), $userInfo ));
 		$this->session_status_log_model->insert(array('SID'=>$SID, 'status'=>'JOINED', 'datetime' => $datetime));
 		$this->session_status_log_model->insert(array('SID'=>$SID, 'status'=>'WAIT', 'datetime' => $datetime));
-
 		//+++++++++++++++++++++++++++
-
 		$this->session->set_userdata('SID',$SID);
 		$this->counter_param_model->increase('JOINED');
 		$this->counter_param_model->increase('WAIT');
