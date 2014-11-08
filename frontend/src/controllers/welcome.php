@@ -14,13 +14,8 @@ class Welcome extends MY_Controller
 	}
 
 
-	public function geoloc()
+	public function geoloc($ip=0)
 	{
-		// $IP     = $this->webclient->getIP();
-  //       $realIP = $this->webclient->getRealIP();
-  //       $browser = $this->browser->getBrowser();
-  //       $browserVer = $this->browser->getVersion();
-
 		$basicInfo = array(
         	'IP'     => $this->webclient->getIP(),
 	        'realIP' => $this->webclient->getRealIP(),
@@ -28,7 +23,7 @@ class Welcome extends MY_Controller
 	        'browserVer' => $this->browser->getVersion()
         );
         //-----------------------------------
-        $ip = false;
+        $ip = $ip == FALSE ? FALSE : $basicInfo['IP'];
         $locationInfo = array();
         $geoloc = @json_decode(file_get_contents("http://freegeoip.net/json/{$ip}"));
         if( $geoloc != null ) {
