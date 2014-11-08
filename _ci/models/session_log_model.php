@@ -11,6 +11,7 @@ class Session_log_model extends MY_Model
 	{
 		$result = $this->db->from($this->table)
     		->where('DATE(datetime) = DATE(NOW())')
+    		->order_by('SID desc')
     		->get()->result_array();
 
     	return $result;
