@@ -69,22 +69,22 @@ class MY_Controller extends CI_Controller
         );
         //---------------------------------------------------
         $locationInfo = array();
-       	if( $basicInfo['IP'] != FALSE OR  $basicInfo['IP'] != NULL )
-       	{
-       		$ip = $basicInfo['IP'] ;
-       		$geoloc = @json_decode(file_get_contents("http://freegeoip.net/json/{$ip}"));
-	        if( $geoloc != FALSE OR $geoloc != NULL )  {
-	        	$locationInfo = array(
-	        		'countryName' => @$geoloc->country_name,
-		            'countryCode' => @$geoloc->country_code,
-		            'regionName' => @$geoloc->region_name,
-		            'regionCode' => @$geoloc->region_code,
-		            'city' => @$geoloc->city,
-		            'lat' => @$geoloc->latitude,
-		            'lng' => @$geoloc->longitude
-	        	);
-	        }
-       	}
+       	// if( $basicInfo['IP'] != FALSE OR  $basicInfo['IP'] != NULL )
+       	// {
+       	// 	$ip = $basicInfo['IP'] ;
+       	// 	$geoloc = @json_decode(file_get_contents("http://freegeoip.net/json/{$ip}"));
+	       //  if( $geoloc != FALSE OR $geoloc != NULL )  {
+	       //  	$locationInfo = array(
+	       //  		'countryName' => @$geoloc->country_name,
+		      //       'countryCode' => @$geoloc->country_code,
+		      //       'regionName' => @$geoloc->region_name,
+		      //       'regionCode' => @$geoloc->region_code,
+		      //       'city' => @$geoloc->city,
+		      //       'lat' => @$geoloc->latitude,
+		      //       'lng' => @$geoloc->longitude
+	       //  	);
+	       //  }
+       	// }
         
         
         //---------------------------------------------------
