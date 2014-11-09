@@ -69,6 +69,19 @@ class Server_slot_model extends MY_Model
     }
 
 
+    function get_playerID_on_server_slot($serverID, $slotNo)
+    {
+        $result = $this->db
+            ->select('playerID')
+            ->where('playerID IS NOT NULL')
+            ->where('serverID',$serverID)
+            ->where('slotNo',$slotNo)
+            ->get($this->table)->row_array();
+
+        if(count($result)==0) return false; 
+        else return $result['playerID'];
+    }
+
     function update_server_slot_status($isActive, $serverID, $slotNo)
     {
         $this->db

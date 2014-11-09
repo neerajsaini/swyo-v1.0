@@ -35,6 +35,13 @@ class Server extends MY_Controller
 		$isActive = $status == 'activate' ? 1 : 0 ;
 
 		$this->server_slot_model->update_server_slot_status($isActive, $serverID, $slotNo);
+		$playerID = $this->server_slot_model->get_playerID_on_server_slot($serverID, $slotNo);
+		if($playerID) {
+			$this->server_slot_model->remove_player($playerID);
+			$this->session_model->update_status('PLAY_TIME_OUT',$playerID);
+		}
+		
+
 
 		echo json_encode('done');
 	}
