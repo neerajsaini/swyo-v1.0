@@ -11,20 +11,26 @@
                 <span class="txtBlue"> game </span>
             </div>
             <div>
-                if your luck betrays <span class="txtBlue">refresh</span> the page
-             </div>
+                if your luck betrays <span class="txtBlue">refresh</span> the page 
+            </div>
          </div>
          
-         <div class="imgLoading">
-            <img src="{{images_url('wait/load.gif')}}" alt="">
+        <div style="padding-top: 20px;">
+            On <span class="txtBlue">Chrome</span> <span class="txtRed">and</span> <span class="txtBlue">Firefox</span> 
+            <br>
+            <img src="{{images_url('wait/pointer_lock.png')}}" style="width:500px;"> 
         </div>
-        <br>
+
+        <div class="imgLoading" style="padding-top: 40px;">
+            <img src="{{images_url('wait/load_new.gif')}}" style="height:350px;">
+        </div>
+        <!-- <br>
         <div class="">
             <span class="">You can</span>
             <span class="txtRed">test play</span>
             <span>for</span>
             <span class="blue">10 min!</span>
-        </div>
+        </div> -->
     </div>
 
     <!-- SCRIPT
@@ -41,6 +47,6 @@
                     setTimeout(function(){
                         $('#gamePanel .gpContent').slideToggle();
                     },2000);
-            },10000);
+            },30000);
         });
     </script>
