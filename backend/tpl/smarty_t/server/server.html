@@ -71,10 +71,13 @@
 					<tr>
 						<th> Server </th>
 						<th> serverIP </th>
+						<th> serverPort </th>
 						<th> videoServerIP </th>
 						<th> applicationID </th>
 						<th> videoID </th>
 						<th> videoPort </th>
+						<th> Quality </th>
+						<th> GAME </th>
 						<th> htmlFile </th>
 						<th> &nbsp; </th>
 					</tr>
@@ -84,10 +87,13 @@
 					<tr>
 						<td> ({{$row.serverID}}) {{$row.serverName}}  </td>
 						<td> {{$row.serverIP}} </td>
+						<td> {{$row.serverPort}} </td>
 						<td> {{$row.videoServerIP}} </td>
 						<td> {{$row.applicationID}} </td>
 						<td> {{$row.videoID}} </td>
 						<td> {{$row.videoServerPort}} </td>
+						<td> {{$row.videoQuality}} </td>
+						<td> <b>{{$row.gameName}}</b> </td>
 						<td> {{$row.htmlFile}} </td>
 						<td> &nbsp; </td>
 					</tr>

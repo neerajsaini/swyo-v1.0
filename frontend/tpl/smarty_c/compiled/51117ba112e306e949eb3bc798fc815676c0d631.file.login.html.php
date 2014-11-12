@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2014-11-10 16:11:32
+<?php /* Smarty version Smarty-3.1.19, created on 2014-11-12 17:56:42
          compiled from "/Applications/AMPPS/www/stream/v1.0/frontend/tpl/smarty_t/login/login.html" */ ?>
-<?php /*%%SmartyHeaderCode:12064768475460d5a40d7cf0-15219963%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:2326364755463914add6190-23938343%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -13,19 +13,19 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '299805cb9dca5b4ec7b5fb34604fce86d367f6ea' => 
     array (
       0 => '/Applications/AMPPS/www/stream/v1.0/frontend/tpl/smarty_t/layout/master.html',
-      1 => 1414416459,
+      1 => 1415804573,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '12064768475460d5a40d7cf0-15219963',
+  'nocache_hash' => '2326364755463914add6190-23938343',
   'function' => 
   array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.19',
-  'unifunc' => 'content_5460d5a4149fa9_21714975',
+  'unifunc' => 'content_5463914b008e28_55583448',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5460d5a4149fa9_21714975')) {function content_5460d5a4149fa9_21714975($_smarty_tpl) {?><!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_5463914b008e28_55583448')) {function content_5463914b008e28_55583448($_smarty_tpl) {?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -134,5 +134,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
 }); </script>
 
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-53090236-3', 'auto');
+      ga('send', 'pageview');
+    </script>
 </body>
 </html><?php }} ?>

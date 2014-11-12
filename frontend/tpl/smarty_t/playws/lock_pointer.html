@@ -38,7 +38,7 @@ var clipURL;
 var serverData;
 
  $(function() {
-	serverData =  "ws://" + "{{$serverData['serverIP']}}" + ":1235";
+	serverData =  "ws://" + "{{$serverData['serverIP']}}" + ":" + "{{$serverData['serverPort']}}" ;
 
 	window.WebSocket = window.WebSocket || window.MozWebSocket;
 	websocket = new WebSocket( serverData, 'int-forward');
@@ -67,6 +67,7 @@ clipURL=getParam("videoID");
 	$f("player", 
 	{
 		src: "http://releases.flowplayer.org/swf/flowplayer-3.2.18.swf",
+		quality: "{{$serverData['videoQuality']}}",
 		wmode: "opaque"
 	}, 
 	{ 
