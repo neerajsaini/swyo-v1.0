@@ -25,6 +25,23 @@ class Server extends MY_Controller
 	}
 
 
+	function editServerData()
+	{
+		$this-> form_validation->set_rules(array(
+            array(
+                'field' => 'playerName',
+                'label' => 'Player Name',
+                'rules' => 'trim|required|min_length[3]'
+            ),
+            array(
+                'field' => 'password',
+                'label' => 'Password',
+                'rules' => 'trim|required|min_length[4]|callback_authPlayerLogin'
+            )
+        ));
+	}
+
+
 	function toggleServerSlotStatus($str)
 	{
 		$part = explode("_", $str);

@@ -96,7 +96,50 @@
 				</table>
 			</div>
 		</div>
+		
+		{{* <!--  
+		<div class="row">
+			<h2 class="col-sm-12"> SERVER INFO </h2>
+			<div class="col-sm-12 table-responsive">
+				<table class="table table-hover">
+					<thead>
+					<tr>
+						<th> ID </th>
+						<th> Name </th>
+						<th> serverIP </th>
+						<th> videoServerIP </th>
+						<th> applicationID </th>
+						<th> videoID </th>
+						<th> videoPort </th>
+						<th> htmlFile </th>
+						<th> &nbsp; </th>
+					</tr>
+					</thead>
+					<tbody>
+					{{foreach $serverData as $row}}
+					<tr>
+						<form method="post" >
+						<input type="hidden" name="editServerData" value="true">
+						<input type="hidden" name="serverID" value="{{$row.serverID}}">
+						<td> ({{$row.serverID}}) </td>
+						<td> <input type="text" name="serverName" value="{{$row.serverName}}" style="width:90%;">  </td>
+						<td> <input type="text" name="serverIP" value="{{$row.serverIP}}" style="width:90%;">  </td>
+						<td> <input type="text" name="videoServerIP" value="{{$row.videoServerIP}}" style="width:90%;"> </td>
+						<td> <input type="text" name="applicationID" value="{{$row.applicationID}}" style="width:90%;"> </td>
+						<td> <input type="text" name="videoID" value="{{$row.videoID}}" style="width:90%;">  </td>
+						<td> <input type="text" name="videoServerPort" value="{{$row.videoServerPort}}" style="width:90%;">  </td>
+						<td> <input type="text" name="htmlFile" value="{{$row.htmlFile}}" style="width:90%;">  </td>
+						<td> <button type="submit"> save </button> </td>
+						</form>
+					</tr>
+					{{/foreach}}
+					</tbody>
+				</table>
+			</div>
+		</div>
+		--> *}}
 
+	<br><br><br>
 	</div>
 </div>
 {{/block}}
