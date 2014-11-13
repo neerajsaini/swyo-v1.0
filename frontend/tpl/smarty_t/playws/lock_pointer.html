@@ -60,6 +60,11 @@ function getParam( sParamName ){
   }
 }
 
+function update()
+{
+	$f().getClip().update();
+}
+
 
 
 clipURL=getParam("videoID");
@@ -78,7 +83,10 @@ clipURL=getParam("videoID");
 			scaling: 'scale', 
 			bufferLength: 0.0, 
 			bufferTime: 0.0, 
-			autoPlay: true 
+			autoPlay: true ,
+			onStart: function() {
+				setTimeout( function(){ update() }, 8000 );
+			}
 		},
 		plugins: {		
 			controls:null,

@@ -48,6 +48,12 @@ function getParam( sParamName ){
     }
   }
 }
+
+function update()
+{
+	$f().getClip().update();
+}
+
 var websocket;
 var serverData;
 
@@ -79,8 +85,9 @@ clipURL=getParam("videoID");
 			bufferTime: 0.0, 
 			autoPlay: true,
 			onStart: function() {
-					setSizes();
-				}
+				setSizes();
+				setTimeout( function(){ update() }, 8000 );
+			}
 		},
 		plugins: {
 			controls:null,
