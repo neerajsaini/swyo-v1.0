@@ -4,6 +4,11 @@
 <div class="pgContent">
 	<div class="container">
 
+
+		<!-- ******************************************* -->
+		<!-- TODAY's STAT -->
+		<!-- ******************************************* -->
+
 		<div class="row">
 			<div class="col-sm-12">
 				<h2> TODAY's STAT </h2>
@@ -25,8 +30,12 @@
 						</tr>
 					</tbody>
 				</table>
-			</div>
+			</div> <!-- col -->
 		</div> <!-- row -->
+
+		<!-- ******************************************* -->
+		<!-- PLAYING -->
+		<!-- ******************************************* -->
 
 		<div class="row">
 			<div class="col-sm-12">
@@ -39,6 +48,7 @@
 							<th> isPremium </th>
 							<th> Status </th>
 							<th> Duration </th>
+							<th> Updated </th>
 							<th> &nbsp; </th>
 						</tr>
 					</thead>
@@ -51,8 +61,21 @@
 							<td> {{$row.status}} </td>
 							<td> 
 								{{if $row.playTime}} 
-									{{if $row.playTime lt 60 }} {{$row.playTime}} sec 
-									{{else}} {{ceil($row.playTime/60)}} min 
+									{{if $row.playTime lt 60 }} 
+										{{$row.playTime}} <span class="small">sec</span> 
+									{{else}} 
+										{{assign 'durMin' $row.playTime/60}}
+										{{$durMin|string_format:"%.2f"}} <span class="small">min</span>
+									{{/if}} 
+								{{/if}} 
+							</td>
+							<td> 
+								{{if $row.updateTime}} 
+									{{if $row.updateTime lt 60 }} 
+										{{$row.updateTime}} <span class="small">sec ago</span>
+									{{else}} 
+										{{assign 'durMin' $row.updateTime/60}}
+										{{$durMin|string_format:"%.2f"}} <span class="small">min ago</span>
 									{{/if}} 
 								{{/if}} 
 							</td>
@@ -69,6 +92,10 @@
 				</table>
 			</div> <!-- col -->
 		</div> <!-- row -->
+
+		<!-- ******************************************* -->
+		<!-- WAITING -->
+		<!-- ******************************************* -->
 
 		<div class="row">
 			<div class="col-sm-12">
@@ -93,7 +120,14 @@
 							<td> {{$row.isPremium}} </td>
 							<td> {{$row.inPQueue}} </td>
 							<td> {{$row.startTimestamp|date_format:"%H:%M (%d,%b)"}} </td>
-							<td> {{if $row.waitingTime lt 60}} {{$row.waitingTime}} sec {{else}} {{ceil($row.waitingTime/60)}} min {{/if}}</td>
+							<td> 
+								{{if $row.waitingTime lt 60}} 
+									{{$row.waitingTime}} <span class="small">sec</span> 
+								{{else}} 
+									{{assign 'durMin' $row.waitingTime/60}}
+									{{$durMin|string_format:"%.2f"}} <span class="small">min</span>
+								{{/if}}
+							</td>
 							<td> &nbsp; </td>
 						</tr>
 						{{foreachelse}}
@@ -106,8 +140,9 @@
 			</div> <!-- col -->
 		</div> <!-- row -->
 
-		
-
+		<!-- ******************************************* -->		
+		<!-- TODAY'S SESSION LOG -->
+		<!-- ******************************************* -->
 
 		<div class="row">
 			<div class="col-sm-12">
@@ -155,10 +190,17 @@
 			</div> <!-- col -->
 		</div> <!-- row -->
 
+
+		<!-- ******************************************* -->
+		<!-- DATA VIZ -->
+		<!-- ******************************************* -->
+
 		<br><br><br>
+		{{*
 		<pre> {{print_r($dayData)}} </pre>
 		<pre> {{print_r($hourWiseData)}} </pre>
 		<br><br><br>
+		*}}
 		
 	</div>
 </div>

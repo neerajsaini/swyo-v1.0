@@ -47,9 +47,10 @@ class Server_slot_model extends MY_Model
     {
         $now = date('Y-m-d H:i:s');
         $playTime = "UNIX_TIMESTAMP('{$now}') - UNIX_TIMESTAMP(startTimestamp) AS playTime";
+        $updateTime = "UNIX_TIMESTAMP('{$now}') - UNIX_TIMESTAMP(updateTimestamp) AS updateTime";
 
         return $this->db
-            ->select("sslot.*, player.playerName, player.isPremium, serverName, status, $playTime")
+            ->select("sslot.*, player.playerName, player.isPremium, server.serverName, session.status, $playTime, $updateTime")
             ->from('serverSlot AS sslot')
             ->join('server', 'sslot.serverID = server.serverID', 'left')
             ->join('player', 'sslot.playerID = player.playerID', 'left')

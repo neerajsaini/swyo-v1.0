@@ -34,11 +34,11 @@ class Process extends MY_Controller
 
 		$this->execute = $execute ;
 
+		$this->allot_free_slots();
 		$this->play_time_out();
 		$this->played_out();
 		$this->play_idle_out();
 		$this->queue_idle_out();
-		$this->allot_free_slots();
 
 		if($print) 
 		{
@@ -54,11 +54,11 @@ class Process extends MY_Controller
 	{
 		$this->execute = $execute ;
 
+		$this->allot_free_slots();
 		$this->play_time_out();
 		$this->played_out();
 		$this->play_idle_out();
 		$this->queue_idle_out();
-		$this->allot_free_slots();
 
 		if($this->input->is_ajax_request()) 
 		{

@@ -1,0 +1,94 @@
+{{extends file="layout/master.html"}}
+
+{{block 'pgContent'}}
+<div class="pgContent">
+	<div class="container">
+		
+		<h3> IP TO GEOLOCATE </h3>
+		{{if $fetch == 0}}
+			<pre> NO DATA TO FETCH  </pre>
+		{{else}}
+			<pre> SID :  {{$sessData.SID}} <br> IP :  {{$sessData.IP}} </pre>
+
+			<div id="FreeGeoIP">
+				<h3> FreeGeoIP <span class="status small"> (fetching) </span> </h3> 
+				<pre class="response">  </pre>
+			</div>
+
+			<div id="saveGeoData">
+				<h3> SavingToDB <span class="status small"> (waiting for fetching to be over) </span> </h3> 
+				<pre class="response">  </pre>
+			</div>
+
+
+		{{/if}}
+
+
+	</div>
+</div>
+{{/block}}
+
+
+{{block 'script'}}
+<script> $(document).ready(function() {
+	
+	var fetch = {{$fetch}};
+	var geoData = false ;
+
+	if(fetch == 1) {
+		setTimeout(function() {
+			$.ajax({
+				type: "GET",
+				url: "http://freegeoip.net/json/{{$sessData.IP}}",
+				dataType: 'json',
+				success: function(response) { 
+					geoData = response ;
+				},
+				error: function() {
+
+				},
+				complete: function(XHRobj, status) 
+				{
+					$('#FreeGeoIP .status').html( "("+status+")" );
+					$('#FreeGeoIP .response').html( JSON.stringify(XHRobj) );
+					//----------------------------
+					if(status != "success") {
+						$('#saveGeoData .status').html( "(could not fetch data)" );
+						reloadPage("{{$sessData.SID}}"); 
+					}
+					else {
+						$('#saveGeoData .status').html( "(saving to DB)" );
+						setTimeout(function(){
+							saveGeoData("{{$sessData.SID}}", geoData);
+						},2*1000);
+					}
+					//----------------------------
+				}
+			});
+		}, 2*1000);
+	}
+
+	function reloadPage(SID) {
+		setTimeout(function(){
+			window.location.href = "{{site_url('geolocation/index')}}"+"/"+SID;
+		},2*1000);
+	}
+
+	function saveGeoData(SID,geoData) {
+		$.ajax({
+			type: "POST",
+			url: "{{site_url('geolocation/saveGeoData')}}", 
+			data : { SID : SID , geoData : geoData } ,
+			dataType: 'json',
+			complete: function(XHRobj, status) 
+			{
+				$('#saveGeoData .status').html( "("+status+")" );
+				$('#saveGeoData .response').html( JSON.stringify(XHRobj) );
+				//----------------------------
+				reloadPage(SID); 
+			}
+		});
+	}
+
+}); </script>
+{{/block}}
