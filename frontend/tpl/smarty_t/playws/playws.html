@@ -38,6 +38,8 @@
     <!-- GAME PANEL
     ********************************************* -->
     {{if $serverData.gameName == 'shadow_of_modor'}} 
+        {{include file="playws/shadow_of_modor.html"}}
+    {{else if $serverData.gameName == 'assassin'}} 
         {{include file="playws/assassin.html"}}
     {{/if}}
 
