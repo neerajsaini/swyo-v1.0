@@ -33,9 +33,10 @@ class Session_model extends MY_Model
 	{
 		$now = date('Y-m-d H:i:s');
 		$waitingTime = "UNIX_TIMESTAMP('{$now}') - UNIX_TIMESTAMP(startTimestamp) AS waitingTime";
+		$updateTime = "UNIX_TIMESTAMP('{$now}') - UNIX_TIMESTAMP(updateTimestamp) AS updateTime";
 
 		$result = $this->db
-			->select("session.*, player.* , $waitingTime")
+			->select("session.*, player.* , $waitingTime, $updateTime")
 			->from('session')
 			->join('player', 'session.playerID=player.playerID', 'left')
 			->where('session.status','WAIT')

@@ -46,6 +46,7 @@ class Register extends MY_Controller
         	$playerName = $this->input->post('playerName');
         	$playerName = $this->sanitize->set($playerName)->remove_multispaces()->trim()->get();
 
+            //----------------------------------------------------
             $playerData = array(
                 'playerName' => $playerName,
                 'password' => $this->input->post('password'),
@@ -53,12 +54,18 @@ class Register extends MY_Controller
             );
             $playerID = $this->player_model->insert($playerData);
 
-            $playerinfo = array_merge($this->getUserLocationInfo(), array(
-            	'playerID' => $playerID ,
-                'createDate' => date('Y-m-d H:i:s')
-            ));
+            //----------------------------------------------------
+            $playerinfo = array(
+                'playerID' => $playerID ,
+                'createDate' => date('Y-m-d H:i:s'),
+                'IP'     => $this->webclient->getIP(),
+                'realIP' => $this->webclient->getRealIP(),
+                'browser' => $this->browser->getBrowser(),
+                'browserVer' => $this->browser->getVersion()
+            );
             $this->playerinfo_model->insert($playerinfo);
 
+            //----------------------------------------------------
             $this->session->set_userdata(array(
                 'logged_in' => TRUE,
                 'playerID' => $playerID,

@@ -109,6 +109,7 @@
 							<th> inPQueue </th>
 							<th> Joined </th>
 							<th> Waiting </th>
+							<th> Updated </th>
 							<th> &nbsp; </th>
 						</tr>
 					</thead>
@@ -127,6 +128,16 @@
 									{{assign 'durMin' $row.waitingTime/60}}
 									{{$durMin|string_format:"%.2f"}} <span class="small">min</span>
 								{{/if}}
+							</td>
+							<td> 
+								{{if $row.updateTime}} 
+									{{if $row.updateTime lt 60 }} 
+										{{$row.updateTime}} <span class="small">sec ago</span>
+									{{else}} 
+										{{assign 'durMin' $row.updateTime/60}}
+										{{$durMin|string_format:"%.2f"}} <span class="small">min ago</span>
+									{{/if}} 
+								{{/if}} 
 							</td>
 							<td> &nbsp; </td>
 						</tr>
@@ -168,7 +179,7 @@
 						{{foreach $todaysSessionLog 'row'}}
 						<tr>
 							<td> {{$row.SID}} </td>
-							<td> {{$row.playerID}} </td>
+							<td> ({{$row.playerID}}) {{$row.playerName}} </td>
 							<td> {{$row.IP}} </td>
 							<td> {{$row.browser}} </td>
 							<td> {{$row.browserVer}} </td>
@@ -177,7 +188,7 @@
 							<td> {{$row.city}} </td>
 							<td> {{$row.lat}} </td>
 							<td> {{$row.lng}} </td>
-							<td> {{$row.datetime}} </td>
+							<td> {{$row.datetime|date_format:"%H:%M (%d,%b)"}} </td>
 							<td> &nbsp; </td>
 						</tr>
 						{{foreachelse}}

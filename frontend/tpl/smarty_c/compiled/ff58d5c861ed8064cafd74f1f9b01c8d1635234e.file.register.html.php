@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2014-10-31 13:14:32
+<?php /* Smarty version Smarty-3.1.19, created on 2014-11-14 12:26:36
          compiled from "/Applications/AMPPS/www/stream/v1.0/frontend/tpl/smarty_t/register/register.html" */ ?>
-<?php /*%%SmartyHeaderCode:141115118754537d2844bcc1-15257340%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:21368997165465e6ec6c9f77-53257519%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -13,19 +13,19 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '299805cb9dca5b4ec7b5fb34604fce86d367f6ea' => 
     array (
       0 => '/Applications/AMPPS/www/stream/v1.0/frontend/tpl/smarty_t/layout/master.html',
-      1 => 1414416459,
+      1 => 1415804573,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '141115118754537d2844bcc1-15257340',
+  'nocache_hash' => '21368997165465e6ec6c9f77-53257519',
   'function' => 
   array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.19',
-  'unifunc' => 'content_54537d284c3276_11301473',
+  'unifunc' => 'content_5465e6ec74a044_92244161',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_54537d284c3276_11301473')) {function content_54537d284c3276_11301473($_smarty_tpl) {?><!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_5465e6ec74a044_92244161')) {function content_5465e6ec74a044_92244161($_smarty_tpl) {?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -152,5 +152,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
 }); </script>
 
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-53090236-3', 'auto');
+      ga('send', 'pageview');
+    </script>
 </body>
 </html><?php }} ?>
