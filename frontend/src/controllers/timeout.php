@@ -35,12 +35,14 @@ class Timeout extends MY_Controller
 		}
 		$this->smarty->assign('feedback_question', $feedback_question);
 
+        // FORM SUBMITTED
+        //----------------------------------------------------
 		if($this-> form_validation-> run() !== FALSE)
         {
         	$datetime = date("Y-m-d H:i:s");
         	$playerID = $this->session->userdata('playerID');
-        	$playerID = 2;
 
+            //----------------------------------------------------
         	foreach( $feedback_question as $questionID => $row) 
         	{
         		$qaBatchData[] = array(
@@ -50,7 +52,9 @@ class Timeout extends MY_Controller
         			'datetime' => $datetime
         		);
         	}
+            $this->db->insert_batch('feedback_answer' , $qaBatchData);
 
+            //----------------------------------------------------
         	if($this->input->post('comment')) 
         	{
         		$commentData = array(
@@ -58,11 +62,10 @@ class Timeout extends MY_Controller
         			'comment' => $this->input->post('comment'),
         			'datetime' => $datetime
         		);
+                $this->db->insert('feedback_comment' , $commentData);
         	}
 
-        	$this->db->insert_batch('feedback_answer' , $qaBatchData);
-        	$this->db->insert('feedback_comment' , $commentData);
-
+            //----------------------------------------------------
         	$this->smarty->assign('feedback_recieved', true);
         }
 
