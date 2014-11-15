@@ -32,17 +32,28 @@
 <!-- this script block will install Flowplayer inside previous A tag -->
 <script type="text/javascript">
 
-var websocket;
-var elem;
-var clipURL;
-var serverData;
+	var websocket;
+	var elem;
+	var clipURL;
+	var serverData;
+	var manualClose = false;
 
- $(function() {
-	serverData =  "ws://" + "{{$serverData['serverIP']}}" + ":" + "{{$serverData['serverPort']}}" ;
+	function connectWS() {
+		if(manualClose==false) {
+			serverData =  "ws://" + "{{$serverData['serverIP']}}" + ":" + "{{$serverData['serverPort']}}" ;
+			window.WebSocket = window.WebSocket || window.MozWebSocket;
+			websocket = new WebSocket( serverData, 'int-forward');
+		}
+	}
 
-	window.WebSocket = window.WebSocket || window.MozWebSocket;
-	websocket = new WebSocket( serverData, 'int-forward');
-});
+	// called on page load
+	connectWS();
+
+	websocket.onclose = function() { 
+		console.log('Connection closed');
+		//try to reconnect in 5 seconds
+		setTimeout(function(){connectWS()}, 5000);
+	}
 
 
 
@@ -94,7 +105,7 @@ clipURL=getParam("videoID");
 				all:false,
 				url: "flowplayer.rtmp-3.2.13.swf",
 				inBufferSeek:false,
-				netConnectionUrl: 'rtmp://{{$serverData.videoServerIP}}:{{$serverData.videoServerPort}}/{{$serverData.applicationID}}/' 
+				netConnectionUrl: 'rtmfp://{{$serverData.videoServerIP}}:{{$serverData.videoServerPort}}/{{$serverData.applicationID}}/' 
 			} 
 		}
 	});
@@ -312,7 +323,7 @@ document.addEventListener('webkitpointerlockerror', pointerLockError, false);
             success: function(response){ 
                 // console.log(response); 
                 if(response.redirect != false) {
-                	websocket.onclose = function () {};
+                	manualClose = true;
 					websocket.close();
 					window.location.href = "{{site_url('"+response.redirect+"')}}" ;
 				}
@@ -324,7 +335,7 @@ document.addEventListener('webkitpointerlockerror', pointerLockError, false);
             },
             error: function(response){
             	// console.log(response); 
-            	websocket.onclose = function () {};
+            	manualClose = true;
 				websocket.close();
 				window.location.href = '{{site_url("logout")}}';
             }
